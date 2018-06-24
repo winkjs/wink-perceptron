@@ -44,11 +44,11 @@ var perceptron = function () {
   // The number of updates.
   var updates = 0;
 
-  // Configuration variables.
+  // Configuration variables and their default values.
   // Maximum number of learning iterations.
-  var maxIterations = 900;
+  var maxIterations = 9;
   // True means data will be shuffled after every iteration.
-  var shuffleData = true;
+  var shuffleData = false;
   // Ordered Set Of Features Extractor function.
   var osofExtractor = null;
 
@@ -208,9 +208,9 @@ var perceptron = function () {
     // default is **`false`**.
     shuffleData = !!configuration.shuffleData;
     // Default # of maximum iteration is **6**.
-    maxIterations = configuration.maxIterations || 6;
+    maxIterations = configuration.maxIterations || maxIterations;
     // Ordered Set Of Features Extractor function; default is none!
-    osofExtractor = configuration.osofExtractor || null;
+    osofExtractor = configuration.osofExtractor || osofExtractor;
   }; // defineConfig()
 
   methods.defineConfig = defineConfig;
