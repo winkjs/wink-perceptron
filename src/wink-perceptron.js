@@ -24,7 +24,17 @@
 var helpers = require( 'wink-helpers' );
 var shuffle = helpers.array.shuffle;
 /* eslint-disable guard-for-in */
-// wink multi-class averaged perceptron
+
+// ### wink-perceptron
+// wink multi-class averaged perceptron; its implementation is inspired by the
+// research titled, "Practical Structured Learning Techniques for Natural Language
+// Processing" by Harold Charles Daume dated August 2006.
+//
+// The essential idea is to (a) avoid addition of entire vector at every iteration,
+// (b) perform computations only when updates occur, and (c) completely leverage
+// the sparisity (if any) present in the vector. The  weight and bias adjustment
+// funtions capture this idea.
+
 var perceptron = function () {
   // The weights matrix with **features** x **classes** dimensions.
   var weights = Object.create( null );
