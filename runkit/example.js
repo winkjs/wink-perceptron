@@ -1,5 +1,5 @@
 //     wink-perceptron
-//     Language agnostic named entity recognizer
+//     Multi-class averaged perceptron
 //
 //     Copyright (C) 2017-18  GRAYPE Systems Private Limited
 //
