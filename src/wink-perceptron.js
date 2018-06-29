@@ -59,8 +59,10 @@ var perceptron = function () {
   var maxIterations = 9;
   // True means data will be shuffled after every iteration.
   var shuffleData = false;
-  // Ordered Set Of Features Extractor function.
-  var osofExtractor = null;
+  // Features Extractor function — used to extract features from each element of
+  // the `data` that is passed to learn api. This ensures that shuffling occurs
+  // at the `data` array level and not at feature level.
+  var featureExtractor = null;
 
   // Returns!
   var methods = Object.create( null );
@@ -182,8 +184,8 @@ var perceptron = function () {
     averageBalance();
   }; // learnFromData()
 
-  var learnFromOSOData = function ( data ) {
-    var sof;
+  var learnFromExtractedFeatures = function ( data ) {
+    var features;
     // Prediction.
     var guess;
     // Helper variables for loops.
@@ -194,20 +196,20 @@ var perceptron = function () {
       // Random shuffle of the data — critical for perceptron learning.
       if ( shuffleData ) shuffle( data );
       for ( k = 0; k < data.length; k += 1 ) {
-        sof = osofExtractor( data[ k ] );
-        for ( l = 0; l < sof.length; l += 1 ) {
-          guess = predict( sof[ l ][ 0 ] );
-          if ( guess !== sof[ l ][ 1 ].label ) adjustWeights( sof[ l ], guess );
+        features = featureExtractor( data[ k ] );
+        for ( l = 0; l < features.length; l += 1 ) {
+          guess = predict( features[ l ][ 0 ] );
+          if ( guess !== features[ l ][ 1 ].label ) adjustWeights( features[ l ], guess );
         }
       }
     }
 
     averageBalance();
-  }; // learnFromOSOData()
+  }; // learnFromExtractedFeatures()
 
   var learn = function ( data ) {
-    if ( typeof osofExtractor === 'function' ) {
-      learnFromOSOData( data );
+    if ( typeof featureExtractor === 'function' ) {
+      learnFromExtractedFeatures( data );
     } else {
       learnFromData( data );
     }
@@ -220,7 +222,7 @@ var perceptron = function () {
     // Default # of maximum iteration is **6**.
     maxIterations = configuration.maxIterations || maxIterations;
     // Ordered Set Of Features Extractor function; default is none!
-    osofExtractor = configuration.osofExtractor || osofExtractor;
+    featureExtractor = configuration.featureExtractor || featureExtractor;
   }; // defineConfig()
 
   methods.defineConfig = defineConfig;
