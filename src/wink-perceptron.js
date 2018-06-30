@@ -207,12 +207,28 @@ var perceptron = function () {
     averageBalance();
   }; // learnFromExtractedFeatures()
 
-  var learn = function ( data ) {
+  // ### learn
+  /**
+   *
+   * Learns from the `examples`.
+   *
+   * @param {array[]} examples — each example is a 2-element array. The
+   * first element describes example's features and the second one defines
+   * its class label. Both of these are expressed in form of an object. The
+   * features object contain feature `name/value` pairs whereas the class label
+   * is defined as `{ label: <class> }`.
+   *
+   * @return {number} number of examples passed.
+   * @example
+   * myPerceptron.learn(  examples );
+  */
+  var learn = function ( examples ) {
     if ( typeof featureExtractor === 'function' ) {
-      learnFromExtractedFeatures( data );
+      learnFromExtractedFeatures( examples );
     } else {
-      learnFromData( data );
+      learnFromData( examples );
     }
+    return ( examples.length );
   }; // learn()
 
   var defineConfig = function ( configuration ) {
