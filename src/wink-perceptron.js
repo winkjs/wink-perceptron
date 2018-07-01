@@ -210,13 +210,14 @@ var perceptron = function () {
   // ### learn
   /**
    *
-   * Learns from the `examples`.
+   * Learns from the **examples**. Note the configuration parameters — **shuffle**
+   * and **maxIterations** — influence the outcome of learning process.
    *
    * @param {array[]} examples — each example is a 2-element array. The
    * first element describes example's features and the second one defines
    * its class label. Both of these are expressed in form of an object. The
-   * features object contain feature `name/value` pairs whereas the class label
-   * is defined as `{ label: <class> }`.
+   * features object contains **name/value** pairs for every feature, whereas the
+   * class label contains single name/value pair as `{ label: <class> }`.
    *
    * @return {number} number of examples passed.
    * @example

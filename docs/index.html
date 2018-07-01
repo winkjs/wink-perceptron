@@ -98,7 +98,8 @@ Software Foundation, version 3 of the License.</p>
   </div>
   
 
-  <p>Learns from the <code>examples</code>.</p>
+  <p>Learns from the <strong>examples</strong>. Note the configuration parameters — <strong>shuffle</strong>
+and <strong>maxIterations</strong> — influence the outcome of learning process.</p>
 
 
   <div class='pre p1 fill-light mt0'>learn(examples: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a>>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
@@ -122,10 +123,10 @@ Software Foundation, version 3 of the License.</p>
 	    — each example is a 2-element array. The
 first element describes example's features and the second one defines
 its class label. Both of these are expressed in form of an object. The
-features object contain feature 
-<code>name/value</code>
- pairs whereas the class label
-is defined as 
+features object contains 
+<strong>name/value</strong>
+ pairs for every feature, whereas the
+class label contains single name/value pair as 
 <code>{ label: &#x3C;class> }</code>
 .
 
