@@ -173,13 +173,13 @@ var perceptron = function () {
 
     // Starting from **1** ensures that we iterate **maxIterations** times.
     for ( j = 1; j < maxIterations; j += 1 ) {
-      // Random shuffle of the data — critical for perceptron learning.
-      if ( shuffleData ) shuffle( data );
       for ( k = 0; k < data.length; k += 1 ) {
         guess = predict( data[ k ][ 0 ] );
         if ( guess !== data[ k ][ 1 ].label ) adjustWeights( data[ k ], guess );
-      }
-    }
+      } // for data.length
+      // Random shuffle of the data — critical for perceptron learning.
+      if ( shuffleData ) shuffle( data );
+    } // for maxIterations
 
     averageBalance();
   }; // learnFromData()
@@ -193,16 +193,16 @@ var perceptron = function () {
 
     // Starting from **1** ensures that we iterate **maxIterations** times.
     for ( j = 1; j < maxIterations; j += 1 ) {
-      // Random shuffle of the data — critical for perceptron learning.
-      if ( shuffleData ) shuffle( data );
       for ( k = 0; k < data.length; k += 1 ) {
         features = featureExtractor( data[ k ] );
         for ( l = 0; l < features.length; l += 1 ) {
           guess = predict( features[ l ][ 0 ] );
           if ( guess !== features[ l ][ 1 ].label ) adjustWeights( features[ l ], guess );
-        }
-      }
-    }
+        } // for features.length
+      } // for data.length
+      // Random shuffle of the data — critical for perceptron learning.
+      if ( shuffleData ) shuffle( data );
+    } // for maxIterations
 
     averageBalance();
   }; // learnFromExtractedFeatures()
