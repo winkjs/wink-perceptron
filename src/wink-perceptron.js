@@ -240,6 +240,8 @@ var perceptron = function () {
     maxIterations = configuration.maxIterations || maxIterations;
     // Ordered Set Of Features Extractor function; default is none!
     featureExtractor = configuration.featureExtractor || featureExtractor;
+
+    return ( { shuffleData: shuffleData, maxIterations: maxIterations, featureExtractor: featureExtractor } );
   }; // defineConfig()
 
   methods.defineConfig = defineConfig;
