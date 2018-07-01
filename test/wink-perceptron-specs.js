@@ -71,8 +71,8 @@ td.forEach( function ( e ) {
 
 // Tests
 describe( 'instantiate perceptron ', function () {
-  it( 'must return 7 methods', function () {
-    expect( Object.keys( perceptron() ).length ).to.equal( 4 );
+  it( 'must return 3 methods', function () {
+    expect( Object.keys( perceptron() ).length ).to.equal( 3 );
   } );
 } );
 
