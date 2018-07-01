@@ -247,7 +247,7 @@ var perceptron = function () {
   methods.defineConfig = defineConfig;
   methods.learn = learn;
   methods.predict = predict;
-  methods.show = function () { console.log(sumOfWts); console.log(sumOfBiases); console.log( updates ); }; // eslint-disable-line
+  // methods.show = function () { console.log(sumOfWts); console.log(sumOfBiases); console.log( updates ); }; // eslint-disable-line
   return ( methods );
 }; // perceptron()
 
