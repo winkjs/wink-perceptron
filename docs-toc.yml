@@ -4,3 +4,5 @@ toc:
   - name: Creating an Instance
   - perceptron
   - name: API Methods
+  - defineConfig
+  - learn

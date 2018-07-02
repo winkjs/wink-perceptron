@@ -65,6 +65,16 @@
               
                 
                 <li><a
+                  href='#defineconfig'
+                  class="">
+                  defineConfig
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#learn'
                   class="">
                   learn
@@ -215,6 +225,146 @@ training, prediction, etc.
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='defineconfig'>
+      defineConfig
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Defines the hyperparameters for perceptron.</p>
+
+
+  <div class='pre p1 fill-light mt0'>defineConfig(config: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>config</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    — table below details the properties of 
+<code>config</code>
+ object.
+<p><em>An empty config object is equivalent to setting default configuration.</em></p>
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.shuffleData</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  
+    (default <code>false</code>)
+  </td>
+  <td class='break-word'><span>determines whether or not the
+training examples should be randomly shuffled after each iteration a.k.a epoch.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.maxIterations</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
+  
+    (default <code>9</code>)
+  </td>
+  <td class='break-word'><span>number of passes that must be made
+over the examples in order to complete the learning.
+</span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>config.featureExtractor</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">function</a></code>
+  
+    (default <code>null</code>)
+  </td>
+  <td class='break-word'><span>extracts feature(s) along with the corresponding class label(s)
+from example prior to each iteration. This is useful when raw examples need to be
+passed to 
+<a href="#learn"><code>learn()</code></a>
+ instead of features &#x26; labels. If it extracts >1 features
+then each of the extracted feature/label pair is processed sequentially during learning.
+Note 
+<code>shuffleData</code>
+ value will only control the shuffling of input examples and
+not of the extracted features with this function.
+</span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></code>:
+        a copy of configuration defined.
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Enable random shuffling of examples!</span>
+myPerceptron.defineConfig( { <span class="hljs-attr">shuffleData</span>: <span class="hljs-literal">true</span> } );
+<span class="hljs-comment">// -&gt; { shuffleData: true, maxIterations: 9, featureExtractor: null }</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='learn'>
       learn
     </h3>
@@ -223,8 +373,8 @@ training, prediction, etc.
   </div>
   
 
-  <p>Learns from the <strong>examples</strong>. Note the configuration parameters — <strong>shuffle</strong>
-and <strong>maxIterations</strong> — influence the outcome of learning process.</p>
+  <p>Learns from the <strong>examples</strong>. The hyperparameters, defined via <a href="#defineconfig"><code>defineConfig</code></a>,
+control learning process.</p>
 
 
   <div class='pre p1 fill-light mt0'>learn(examples: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a>>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>

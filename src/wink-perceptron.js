@@ -221,8 +221,8 @@ var perceptron = function () {
   // ### learn
   /**
    *
-   * Learns from the **examples**. Note the configuration parameters — **shuffle**
-   * and **maxIterations** — influence the outcome of learning process.
+   * Learns from the **examples**. The hyperparameters, defined via [`defineConfig`](#defineconfig),
+   * control learning process.
    *
    * @param {array[]} examples — each example is a 2-element array. The
    * first element describes example's features and the second one defines
@@ -243,14 +243,39 @@ var perceptron = function () {
     return ( examples.length );
   }; // learn()
 
-  var defineConfig = function ( configuration ) {
+  // ### defineConfig
+  /**
+   *
+   * Defines the hyperparameters for perceptron.
+   *
+   * @param {object} config — table below details the properties of `config` object.
+   *
+   * *An empty config object is equivalent to setting default configuration.*
+   *
+   * @param {boolean} [config.shuffleData=false] determines whether or not the
+   * training examples should be randomly shuffled after each iteration a.k.a epoch.
+   * @param {number} [config.maxIterations=9] number of passes that must be made
+   * over the examples in order to complete the learning.
+   * @param {function} [config.featureExtractor=null] extracts feature(s) along with the corresponding class label(s)
+   * from example prior to each iteration. This is useful when raw examples need to be
+   * passed to [`learn()`](#learn) instead of features & labels. If it extracts >1 features
+   * then each of the extracted feature/label pair is processed sequentially during learning.
+   * Note `shuffleData` value will only control the shuffling of input examples and
+   * not of the extracted features with this function.
+   * @return {object} a copy of configuration defined.
+   * @example
+   * // Enable random shuffling of examples!
+   * myPerceptron.defineConfig( { shuffleData: true } );
+   * // -> { shuffleData: true, maxIterations: 9, featureExtractor: null }
+  */
+  var defineConfig = function ( config ) {
     // Convert 'truthy -> true' or `falsy -> false`. This also implies that
     // default is **`false`**.
-    shuffleData = !!configuration.shuffleData;
+    shuffleData = !!config.shuffleData;
     // Default # of maximum iteration is **6**.
-    maxIterations = configuration.maxIterations || maxIterations;
+    maxIterations = config.maxIterations || maxIterations;
     // Ordered Set Of Features Extractor function; default is none!
-    featureExtractor = configuration.featureExtractor || featureExtractor;
+    featureExtractor = config.featureExtractor || featureExtractor;
 
     return ( { shuffleData: shuffleData, maxIterations: maxIterations, featureExtractor: featureExtractor } );
   }; // defineConfig()
