@@ -78,7 +78,19 @@ var perceptron = function () {
   // Returns!
   var methods = Object.create( null );
 
-
+  // ### predict
+  /**
+   *
+   * Predicts the label for the input `features`. If it is unable to predict then
+   * it returns a value **`unknown`**.
+   *
+   * @param {object} features — object that contains **name/value** pairs for every
+   * feature.
+   *
+   * @return {string} predicted class label for the input `features`.
+   * @example
+   * myPerceptron.predict( features );
+  */
   var predict = function ( features ) {
     // Scores, index by **class**.
     var scores = Object.create( null );
@@ -114,7 +126,7 @@ var perceptron = function () {
       }
     }
 
-    return ( pc );
+    return ( pc || 'unknown' );
   }; // predict()
 
   var adjustWt = function ( f, v, c ) {
@@ -227,8 +239,8 @@ var perceptron = function () {
    * @param {array[]} examples — each example is a 2-element array. The
    * first element describes example's features and the second one defines
    * its class label. Both of these are expressed in form of an object. The
-   * features object contains **name/value** pairs for every feature, whereas the
-   * class label contains single name/value pair as `{ label: <class> }`.
+   * features object contains **name/numeric-value** pairs for every feature, whereas the
+   * class label contains single name/string-value pair as `{ label: <class> }`.
    *
    * @return {number} number of examples passed.
    * @example

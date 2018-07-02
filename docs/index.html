@@ -83,6 +83,16 @@
                 
                 </li>
               
+                
+                <li><a
+                  href='#predict'
+                  class="">
+                  predict
+                  
+                </a>
+                
+                </li>
+              
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
@@ -399,9 +409,9 @@ control learning process.</p>
 first element describes example's features and the second one defines
 its class label. Both of these are expressed in form of an object. The
 features object contains 
-<strong>name/value</strong>
+<strong>name/numeric-value</strong>
  pairs for every feature, whereas the
-class label contains single name/value pair as 
+class label contains single name/string-value pair as 
 <code>{ label: &#x3C;class> }</code>
 .
 
@@ -431,6 +441,87 @@ class label contains single name/value pair as
     
       
       <pre class='p1 overflow-auto round fill-light'>myPerceptron.learn(  examples );</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='predict'>
+      predict
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Predicts the label for the input <code>features</code>. If it is unable to predict then
+it returns a value <strong><code>unknown</code></strong>.</p>
+
+
+  <div class='pre p1 fill-light mt0'>predict(features: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>features</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    — object that contains 
+<strong>name/value</strong>
+ pairs for every
+feature.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        predicted class label for the input 
+<code>features</code>
+.
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>myPerceptron.predict( features );</pre>
     
   
 
