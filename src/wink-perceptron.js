@@ -34,7 +34,18 @@ var shuffle = helpers.array.shuffle;
 // (b) perform computations only when updates occur, and (c) completely leverage
 // the sparisity (if any) present in the vector. The  weight and bias adjustment
 // funtions capture this idea.
-
+/**
+ *
+ * Creates an instance of **`wink-perceptron`**.
+ *
+ * @return {methods} object conatining set of API methods for preceptron
+ * training, prediction, etc.
+ * @example
+ * // Load wink perceptron.
+ * var ner = require( 'wink-perceptron' );
+ * // Create your instance of wink perceptron.
+ * var myPerceptron = ner();
+*/
 var perceptron = function () {
   // The weights matrix with **features** x **classes** dimensions.
   var weights = Object.create( null );
