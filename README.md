@@ -1,6 +1,6 @@
 # wink-perceptron
 
-Multi-class averaged perceptron (work-in-progress)
+Multi-class averaged perceptron
 
 ### [![Build Status](https://api.travis-ci.org/winkjs/wink-perceptron.svg?branch=master)](https://travis-ci.org/winkjs/wink-perceptron) [![Coverage Status](https://coveralls.io/repos/github/winkjs/wink-perceptron/badge.svg?branch=master)](https://coveralls.io/github/winkjs/wink-perceptron?branch=master) [![Inline docs](http://inch-ci.org/github/winkjs/wink-perceptron.svg?branch=master)](http://inch-ci.org/github/winkjs/wink-perceptron) [![dependencies Status](https://david-dm.org/winkjs/wink-perceptron/status.svg)](https://david-dm.org/winkjs/wink-perceptron) [![devDependencies Status](https://david-dm.org/winkjs/wink-perceptron/dev-status.svg)](https://david-dm.org/winkjs/wink-perceptron?type=dev)
 
