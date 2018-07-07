@@ -14,8 +14,6 @@ Use [npm](https://www.npmjs.com/package/wink-perceptron) to install:
 
     npm install wink-perceptron --save
 
-### Getting Started
-
 
 ### Documentation
 Check out the [perceptron API documentation](http://winkjs.org/wink-perceptron/) to learn more.
