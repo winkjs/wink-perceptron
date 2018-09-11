@@ -43,9 +43,9 @@ var shuffle = helpers.array.shuffle;
  * training, prediction, etc.
  * @example
  * // Load wink perceptron.
- * var ner = require( 'wink-perceptron' );
+ * var perceptron = require( 'wink-perceptron' );
  * // Create your instance of wink perceptron.
- * var myPerceptron = ner();
+ * var myPerceptron = perceptron();
 */
 var perceptron = function () {
   // The weights matrix with **features** x **classes** dimensions.
