@@ -8,6 +8,7 @@
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
   <link href='assets/github.css' type='text/css' rel='stylesheet' />
   <link href='assets/split.css' type='text/css' rel='stylesheet' />
+  <meta name='description' content='Multi-class averaged perceptron'>
 </head>
 <body class='documentation m0'>
     <div class='flex'>
@@ -103,16 +104,17 @@
       <div id='split-right' class='relative overflow-auto height-viewport-100'>
         
           
-            <div class='keyline-top-not py2'><section class='py2 clearfix'>
+            <div class='keyline-top-not py2'>
+  <section class='py2 clearfix'>
 
-  <h2 id='introduction' class='mt0'>
-    Introduction
-  </h2>
+    <h2 id='introduction' class='mt0'>
+      Introduction
+    </h2>
 
-  
-    <h1>wink-perceptron</h1>
+    
+      <h1>wink-perceptron</h1>
 <p>Multi-class averaged perceptron</p>
-<h3><a href="https://travis-ci.org/winkjs/wink-perceptron"><img src="https://api.travis-ci.org/winkjs/wink-perceptron.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-perceptron?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-perceptron/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-perceptron"><img src="http://inch-ci.org/github/winkjs/wink-perceptron.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-perceptron"><img src="https://david-dm.org/winkjs/wink-perceptron/status.svg" alt="dependencies Status"></a> <a href="https://david-dm.org/winkjs/wink-perceptron?type=dev"><img src="https://david-dm.org/winkjs/wink-perceptron/dev-status.svg" alt="devDependencies Status"></a></h3>
+<h3><a href="https://travis-ci.org/winkjs/wink-perceptron"><img src="https://api.travis-ci.org/winkjs/wink-perceptron.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-perceptron?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-perceptron/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-perceptron"><img src="http://inch-ci.org/github/winkjs/wink-perceptron.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-perceptron"><img src="https://david-dm.org/winkjs/wink-perceptron/status.svg" alt="dependencies Status"></a> <a href="https://david-dm.org/winkjs/wink-perceptron?type=dev"><img src="https://david-dm.org/winkjs/wink-perceptron/dev-status.svg" alt="devDependencies Status"></a> <a href="https://gitter.im/winkjs/Lobby"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Gitter"></a></h3>
 <p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
 <p>Build machine learning models for prediction with dense or sparse data using <strong><code>wink-perceptron</code></strong>. It is a part of <a href="http://winkjs.org/">wink</a> — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.</p>
 <h3>Installation</h3>
@@ -128,28 +130,133 @@
 <p>It is licensed under the under the terms of the GNU Affero General Public License as published by the Free
 Software Foundation, version 3 of the License.</p>
 
-  
-</section>
-</div>
-          
-        
-          
-            <div class='keyline-top-not py2'><section class='py2 clearfix'>
-
-  <h2 id='creating-an-instance' class='mt0'>
-    Creating an Instance
-  </h2>
-
-  
     
+  </section>
+</div>
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='introduction'>
+      Introduction
+    </h3>
+    
+    
+  </div>
+  
+
+  <h1>wink-perceptron</h1>
+<p>Multi-class averaged perceptron</p>
+<h3><a href="https://travis-ci.org/winkjs/wink-perceptron"><img src="https://api.travis-ci.org/winkjs/wink-perceptron.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-perceptron?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-perceptron/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-perceptron"><img src="http://inch-ci.org/github/winkjs/wink-perceptron.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-perceptron"><img src="https://david-dm.org/winkjs/wink-perceptron/status.svg" alt="dependencies Status"></a> <a href="https://david-dm.org/winkjs/wink-perceptron?type=dev"><img src="https://david-dm.org/winkjs/wink-perceptron/dev-status.svg" alt="devDependencies Status"></a> <a href="https://gitter.im/winkjs/Lobby"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Gitter"></a></h3>
+<p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
+<p>Build machine learning models for prediction with dense or sparse data using <strong><code>wink-perceptron</code></strong>. It is a part of <a href="http://winkjs.org/">wink</a> — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.</p>
+<h3>Installation</h3>
+<p>Use <a href="https://www.npmjs.com/package/wink-perceptron">npm</a> to install:</p>
+<pre><code>npm install wink-perceptron --save
+</code></pre>
+<h3>Documentation</h3>
+<p>Check out the <a href="http://winkjs.org/wink-perceptron/">perceptron API documentation</a> to learn more.</p>
+<h3>Need Help?</h3>
+<p>If you spot a bug and the same has not yet been reported, raise a new <a href="https://github.com/winkjs/wink-perceptron/issues">issue</a> or consider fixing it and sending a pull request.</p>
+<h3>Copyright &#x26; License</h3>
+<p><strong>wink-perceptron</strong> is copyright 2017-18 <a href="http://graype.in/">GRAYPE Systems Private Limited</a>.</p>
+<p>It is licensed under the under the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, version 3 of the License.</p>
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 </section>
-</div>
-          
+
         
           
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+            <div class='keyline-top-not py2'>
+  <section class='py2 clearfix'>
+
+    <h2 id='creating-an-instance' class='mt0'>
+      Creating an Instance
+    </h2>
+
+    
+      
+
+    
+  </section>
+</div>
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='creating-an-instance'>
+      Creating an Instance
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
@@ -164,8 +271,10 @@ Software Foundation, version 3 of the License.</p>
 
   <p>Creates an instance of <strong><code>wink-perceptron</code></strong>.</p>
 
-
-  <div class='pre p1 fill-light mt0'>perceptron(): methods</div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>perceptron(): methods</div>
+   
   
   
 
@@ -198,9 +307,9 @@ training, prediction, etc.
     
       
       <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Load wink perceptron.</span>
-<span class="hljs-keyword">var</span> ner = <span class="hljs-built_in">require</span>( <span class="hljs-string">'wink-perceptron'</span> );
+<span class="hljs-keyword">var</span> perceptron = <span class="hljs-built_in">require</span>( <span class="hljs-string">'wink-perceptron'</span> );
 <span class="hljs-comment">// Create your instance of wink perceptron.</span>
-<span class="hljs-keyword">var</span> myPerceptron = ner();</pre>
+<span class="hljs-keyword">var</span> myPerceptron = perceptron();</pre>
     
   
 
@@ -211,25 +320,69 @@ training, prediction, etc.
   
 </section>
 
-          
         
           
-            <div class='keyline-top-not py2'><section class='py2 clearfix'>
+            <div class='keyline-top-not py2'>
+  <section class='py2 clearfix'>
 
-  <h2 id='api-methods' class='mt0'>
-    API Methods
-  </h2>
+    <h2 id='api-methods' class='mt0'>
+      API Methods
+    </h2>
 
-  
     
+      
 
-  
-</section>
+    
+  </section>
 </div>
           
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='api-methods'>
+      API Methods
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
         
           
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
@@ -244,8 +397,10 @@ training, prediction, etc.
 
   <p>Defines the hyperparameters for perceptron.</p>
 
-
-  <div class='pre p1 fill-light mt0'>defineConfig(config: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>defineConfig(config: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></div>
+   
   
   
 
@@ -366,10 +521,9 @@ myPerceptron.defineConfig( { <span class="hljs-attr">shuffleData</span>: <span c
   
 </section>
 
-          
         
           
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
@@ -385,8 +539,10 @@ myPerceptron.defineConfig( { <span class="hljs-attr">shuffleData</span>: <span c
   <p>Learns from the <strong>examples</strong>. The hyperparameters, defined via <a href="#defineconfig"><code>defineConfig</code></a>,
 control learning process.</p>
 
-
-  <div class='pre p1 fill-light mt0'>learn(examples: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a>>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>learn(examples: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a>>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
+   
   
   
 
@@ -450,10 +606,9 @@ class label contains single name/string-value pair as
   
 </section>
 
-          
         
           
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+          <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
@@ -469,8 +624,10 @@ class label contains single name/string-value pair as
   <p>Predicts the label for the input <code>features</code>. If it is unable to predict then
 it returns a value <strong><code>unknown</code></strong>.</p>
 
-
-  <div class='pre p1 fill-light mt0'>predict(features: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+ 
+  
+    <div class='pre p1 fill-light mt0'>predict(features: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+   
   
   
 
@@ -531,7 +688,6 @@ feature.
   
 </section>
 
-          
         
       </div>
     </div>
