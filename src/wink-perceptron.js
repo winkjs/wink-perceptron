@@ -183,10 +183,10 @@ var perceptron = function () {
 
       v = features[ f ];
       adjustWt( f, v, truth );
-      if ( guess ) adjustWt( f, -v, guess );
+      if ( guess !== 'unknown' ) adjustWt( f, -v, guess );
     }
     adjustBs( +1, truth );
-    if ( guess ) adjustBs( -1, guess );
+    if ( guess !== 'unknown' ) adjustBs( -1, guess );
   }; // adjustWeights()
 
   var learnFromData = function ( data ) {
@@ -196,7 +196,7 @@ var perceptron = function () {
     var j, k;
 
     // Starting from **1** ensures that we iterate **maxIterations** times.
-    for ( j = 1; j < maxIterations; j += 1 ) {
+    for ( j = 0; j < maxIterations; j += 1 ) {
       for ( k = 0; k < data.length; k += 1 ) {
         guess = predict( data[ k ][ 0 ] );
         if ( guess !== data[ k ][ 1 ].label ) adjustWeights( data[ k ], guess );
@@ -216,7 +216,7 @@ var perceptron = function () {
     var j, k, l;
 
     // Starting from **1** ensures that we iterate **maxIterations** times.
-    for ( j = 1; j < maxIterations; j += 1 ) {
+    for ( j = 0; j < maxIterations; j += 1 ) {
       for ( k = 0; k < data.length; k += 1 ) {
         features = featureExtractor( data[ k ] );
         for ( l = 0; l < features.length; l += 1 ) {
@@ -282,13 +282,22 @@ var perceptron = function () {
    * // -> { shuffleData: true, maxIterations: 9, featureExtractor: null }
   */
   var defineConfig = function ( config ) {
+    if ( !helpers.object.isObject( config ) ) {
+      throw Error( 'wink-perceptron: config must be an object, instead found: ' + ( typeof config ) );
+    }
     // Convert 'truthy -> true' or `falsy -> false`. This also implies that
     // default is **`false`**.
     shuffleData = !!config.shuffleData;
     // Default # of maximum iteration is **6**.
     maxIterations = config.maxIterations || maxIterations;
+    if ( maxIterations < 1 ) {
+      throw Error( 'wink-perceptron: maxIterations should be >1' );
+    }
     // Ordered Set Of Features Extractor function; default is none!
     featureExtractor = config.featureExtractor || featureExtractor;
+    if ( ( featureExtractor !== null ) && ( typeof featureExtractor !== 'function' )  ) {
+      throw Error( 'wink-perceptron: featureExtractor must be a function, instead found: ' + ( typeof featureExtractor ) );
+    }
 
     return ( { shuffleData: shuffleData, maxIterations: maxIterations, featureExtractor: featureExtractor } );
   }; // defineConfig()

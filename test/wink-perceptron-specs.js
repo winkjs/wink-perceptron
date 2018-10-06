@@ -47,18 +47,20 @@ var extractFeatures = function ( e ) {
 // IRIS Data is sourced from UC Irvine Machine Learning Repository;
 // source: https://archive.ics.uci.edu/ml/datasets/iris
 // Prepare data:
+// Training data preparation.
 lines = fs.readFileSync( './test/data/iris-data-train.csv', 'utf8' ).split( '\n' );
 lines.pop();
 td = [];
 lines.forEach( function ( e ) {
   td.push( e.split( ',' ) );
 } );
-
+// The `rawTrainingData` will now be a copy of `td` array.
 rawTrainingData = td.slice( 0 );
 td.forEach( function ( e ) {
   trainingData.push( extractFeatures( e )[ 0 ] );
 } );
 
+// Test data preparation.
 lines = fs.readFileSync( './test/data/iris-data-test.csv', 'utf8' ).split( '\n' );
 lines.pop();
 td = [];
@@ -70,9 +72,28 @@ td.forEach( function ( e ) {
 } );
 
 // Tests
-describe( 'instantiate perceptron ', function () {
+describe( 'instantiate perceptron', function () {
   it( 'must return 3 methods', function () {
     expect( Object.keys( perceptron() ).length ).to.equal( 3 );
+  } );
+} );
+
+describe( 'defineConfig', function () {
+  it( 'should throw error if config is not passed', function () {
+      expect( perceptron().defineConfig.bind( undefined, undefined ) ).to.throw( 'wink-perceptron: config must be an object, instead found:' );
+  } );
+
+  it( 'should throw error maxIterations <1', function () {
+      expect( perceptron().defineConfig.bind( undefined, { maxIterations: -1 } ) ).to.throw( 'wink-perceptron: maxIterations should be >1' );
+  } );
+
+  it( 'should throw error featureExtractor must be a function', function () {
+      expect( perceptron().defineConfig.bind( undefined, { featureExtractor: 1 } ) ).to.throw( 'wink-perceptron: featureExtractor must be a function, instead found:' );
+  } );
+
+  it( 'should default configuration with empty config input', function () {
+      expect( perceptron().defineConfig( {} ) )
+      .to.deep.equal( { shuffleData: false, maxIterations: 9, featureExtractor: null } );
   } );
 } );
 
