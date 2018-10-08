@@ -153,11 +153,11 @@ describe( 'train & predict intent using from text data', function () {
       .to.deep.equal( { shuffleData: true, maxIterations: 9, featureExtractor: null } );
   } );
 
-  it( 'learn must return 120', function () {
+  it( 'learn must return 4', function () {
     expect( p.learn( intents ) ).to.equal( 4 );
   } );
 
-  it( 'must predict with >90% accuracy test data', function () {
+  it( 'must predict autoloan', function () {
     expect( p.predict( { need: 1, to: 1, borrow: 1, money: 1, for: 1, a: 1, new: 1, vehicle: 1 } ) ).to.equal( 'autoloan' );
   } );
 } );

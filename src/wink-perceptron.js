@@ -121,9 +121,9 @@ var perceptron = function () {
       if ( v > pv ) {
         pc = c;
         pv = v;
-      } else if ( v === pv ) {
-        // Everything being equal, fall back to alpha sort!
-        if ( c > pc ) pc = c;
+      } else if ( v === pv && c > pc ) {
+        // Values being equal, fall back to alpha sort!
+        pc = c;
       }
     }
 
