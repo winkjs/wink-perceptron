@@ -22,7 +22,7 @@
 
 //
 var helpers = require( 'wink-helpers' );
-var shuffle = helpers.array.shuffle;
+var shuffleArray = helpers.array.shuffle;
 /* eslint-disable guard-for-in */
 
 // wink multi-class averaged perceptron; its implementation is inspired by the
@@ -189,6 +189,10 @@ var perceptron = function () {
     if ( guess !== 'unknown' ) adjustBs( -1, guess );
   }; // adjustWeights()
 
+  var shuffle = function ( arr ) {
+    if ( shuffleData ) shuffleArray( arr );
+  };
+
   var learnFromData = function ( data ) {
     // Prediction.
     var guess;
@@ -202,7 +206,7 @@ var perceptron = function () {
         if ( guess !== data[ k ][ 1 ].label ) adjustWeights( data[ k ], guess );
       } // for data.length
       // Random shuffle of the data — critical for perceptron learning.
-      if ( shuffleData ) shuffle( data );
+      shuffle( data );
     } // for maxIterations
 
     averageBalance();
@@ -225,7 +229,7 @@ var perceptron = function () {
         } // for features.length
       } // for data.length
       // Random shuffle of the data — critical for perceptron learning.
-      if ( shuffleData ) shuffle( data );
+      shuffle( data );
     } // for maxIterations
 
     averageBalance();

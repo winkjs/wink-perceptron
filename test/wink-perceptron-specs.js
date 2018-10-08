@@ -138,3 +138,26 @@ describe( 'train & predict using from raw iris data', function () {
     expect( pass / testData.length > 0.9 ).to.equal( true );
   } );
 } );
+
+describe( 'train & predict intent using from text data', function () {
+  var p = perceptron();
+  var intents = [
+    [ { i: 1, need: 1, loan: 1, for: 1, a: 1, new: 1, car: 1 }, { label: 'autoloan' } ],
+    [ { i: 1, need: 1, to: 1, borrow: 1, for: 1, a: 1, new: 1, car: 1 }, { label: 'autoloan' } ],
+    [ { i: 1, would: 1, like: 1, to: 1, foreclose: 1, my: 1, loan: 1 }, { label: 'prepay' } ],
+    [ { i: 1, want: 1, to: 1, prepay: 1, my: 1, loan: 1 }, { label: 'prepay' } ]
+  ];
+
+  it( 'defineConfig must return the config in force', function () {
+    expect( p.defineConfig( { shuffleData: true } ) )
+      .to.deep.equal( { shuffleData: true, maxIterations: 9, featureExtractor: null } );
+  } );
+
+  it( 'learn must return 120', function () {
+    expect( p.learn( intents ) ).to.equal( 4 );
+  } );
+
+  it( 'must predict with >90% accuracy test data', function () {
+    expect( p.predict( { need: 1, to: 1, borrow: 1, money: 1, for: 1, a: 1, new: 1, vehicle: 1 } ) ).to.equal( 'autoloan' );
+  } );
+} );
