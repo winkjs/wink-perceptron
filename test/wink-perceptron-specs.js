@@ -161,3 +161,24 @@ describe( 'train & predict intent using from text data', function () {
     expect( p.predict( { need: 1, to: 1, borrow: 1, money: 1, for: 1, a: 1, new: 1, vehicle: 1 } ) ).to.equal( 'autoloan' );
   } );
 } );
+
+describe( 'train & predict for tie in class scores', function () {
+  var p = perceptron();
+  var data = [
+    [ { bad: 1 }, { label: 'L0' } ],
+    [ { good: 1 }, { label: 'L1' } ]
+  ];
+
+  it( 'defineConfig must return the config in force', function () {
+    expect( p.defineConfig( { shuffleData: false, maxIterations: 1 } ) )
+      .to.deep.equal( { shuffleData: false, maxIterations: 1, featureExtractor: null } );
+  } );
+
+  it( 'learn must return 2', function () {
+    expect( p.learn( data ) ).to.equal( 2 );
+  } );
+
+  it( 'must predict label L1', function () {
+    expect( p.predict( { bad: 1, good: 1 } ) ).to.equal( 'L1' );
+  } );
+} );
