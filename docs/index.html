@@ -1,698 +1,84 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset='utf-8' />
-  <title>wink-perceptron 0.1.1 | Documentation</title>
-  <meta name='viewport' content='width=device-width,initial-scale=1'>
-  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
-  <link href='assets/style.css' type='text/css' rel='stylesheet' />
-  <link href='assets/github.css' type='text/css' rel='stylesheet' />
-  <link href='assets/split.css' type='text/css' rel='stylesheet' />
-  <meta name='description' content='Multi-class averaged perceptron'>
+    
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class='documentation m0'>
-    <div class='flex'>
-      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
-        <div class='py1 px2'>
-          <h3 class='mb0 no-anchor'>wink-perceptron</h3>
-          <div class='mb1'><code>0.1.1</code></div>
-          <input
-            placeholder='Filter'
-            id='filter-input'
-            class='col12 block input'
-            type='text' />
-          <div id='toc'>
-            <ul class='list-reset h5 py1-ul'>
-              
-                
-                <li><a
-                  href='#introduction'
-                  class="h5 bold black caps">
-                  Introduction
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#creating-an-instance'
-                  class="h5 bold black caps">
-                  Creating an Instance
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#perceptron'
-                  class="">
-                  perceptron
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#api-methods'
-                  class="h5 bold black caps">
-                  API Methods
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#defineconfig'
-                  class="">
-                  defineConfig
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#learn'
-                  class="">
-                  learn
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#predict'
-                  class="">
-                  predict
-                  
-                </a>
-                
-                </li>
-              
-            </ul>
-          </div>
-          <div class='mt1 h6 quiet'>
-            <a href='http://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
-          </div>
-        </div>
-      </div>
-      <div id='split-right' class='relative overflow-auto height-viewport-100'>
-        
-          
-            <div class='keyline-top-not py2'>
-  <section class='py2 clearfix'>
+<body>
 
-    <h2 id='introduction' class='mt0'>
-      Introduction
-    </h2>
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="http://winkjs.org" target="_blank" >Wink JS</a></h2><h2><a href="https://github.com/winkjs/wink-perceptron" target="_blank" >Github</a></h2><h3>Global</h3><ul><li><a href="global.html#perceptron">perceptron</a></li></ul>
+</nav>
+
+<div id="main">
+    
 
     
-      <h1>wink-perceptron</h1>
-<p>Multi-class averaged perceptron</p>
-<h3><a href="https://travis-ci.org/winkjs/wink-perceptron"><img src="https://api.travis-ci.org/winkjs/wink-perceptron.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-perceptron?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-perceptron/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-perceptron"><img src="http://inch-ci.org/github/winkjs/wink-perceptron.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-perceptron"><img src="https://david-dm.org/winkjs/wink-perceptron/status.svg" alt="dependencies Status"></a> <a href="https://david-dm.org/winkjs/wink-perceptron?type=dev"><img src="https://david-dm.org/winkjs/wink-perceptron/dev-status.svg" alt="devDependencies Status"></a> <a href="https://gitter.im/winkjs/Lobby"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Gitter"></a></h3>
-<p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>wink-perceptron</h1><p>Multi-class averaged perceptron</p>
+<h3><a href="https://travis-ci.org/winkjs/wink-perceptron"><img src="https://api.travis-ci.org/winkjs/wink-perceptron.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-perceptron?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-perceptron/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-perceptron"><img src="http://inch-ci.org/github/winkjs/wink-perceptron.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-perceptron"><img src="https://david-dm.org/winkjs/wink-perceptron/status.svg" alt="dependencies Status"></a> <a href="https://david-dm.org/winkjs/wink-perceptron?type=dev"><img src="https://david-dm.org/winkjs/wink-perceptron/dev-status.svg" alt="devDependencies Status"></a> <a href="https://gitter.im/winkjs/Lobby"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Gitter"></a></h3><p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
 <p>Build machine learning models for prediction with dense or sparse data using <strong><code>wink-perceptron</code></strong>. It is a part of <a href="http://winkjs.org/">wink</a> — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.</p>
-<h3>Installation</h3>
-<p>Use <a href="https://www.npmjs.com/package/wink-perceptron">npm</a> to install:</p>
-<pre><code>npm install wink-perceptron --save
-</code></pre>
-<h3>Documentation</h3>
-<p>Check out the <a href="http://winkjs.org/wink-perceptron/">perceptron API documentation</a> to learn more.</p>
-<h3>Need Help?</h3>
-<p>If you spot a bug and the same has not yet been reported, raise a new <a href="https://github.com/winkjs/wink-perceptron/issues">issue</a> or consider fixing it and sending a pull request.</p>
-<h3>Copyright &#x26; License</h3>
-<p><strong>wink-perceptron</strong> is copyright 2017-18 <a href="http://graype.in/">GRAYPE Systems Private Limited</a>.</p>
+<h3>Installation</h3><p>Use <a href="https://www.npmjs.com/package/wink-perceptron">npm</a> to install:</p>
+<pre class="prettyprint source"><code>npm install wink-perceptron --save</code></pre><h3>Documentation</h3><p>Check out the <a href="http://winkjs.org/wink-perceptron/">perceptron API documentation</a> to learn more.</p>
+<h3>Need Help?</h3><p>If you spot a bug and the same has not yet been reported, raise a new <a href="https://github.com/winkjs/wink-perceptron/issues">issue</a> or consider fixing it and sending a pull request.</p>
+<h3>Copyright &amp; License</h3><p><strong>wink-perceptron</strong> is copyright 2017-18 <a href="http://graype.in/">GRAYPE Systems Private Limited</a>.</p>
 <p>It is licensed under the under the terms of the GNU Affero General Public License as published by the Free
-Software Foundation, version 3 of the License.</p>
+Software Foundation, version 3 of the License.</p></article>
+    </section>
+
+
+
+
+
 
     
-  </section>
+    
 </div>
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
 
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='introduction'>
-      Introduction
-    </h3>
-    
-    
-  </div>
-  
+<br class="clear">
 
-  <h1>wink-perceptron</h1>
-<p>Multi-class averaged perceptron</p>
-<h3><a href="https://travis-ci.org/winkjs/wink-perceptron"><img src="https://api.travis-ci.org/winkjs/wink-perceptron.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-perceptron?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-perceptron/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-perceptron"><img src="http://inch-ci.org/github/winkjs/wink-perceptron.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-perceptron"><img src="https://david-dm.org/winkjs/wink-perceptron/status.svg" alt="dependencies Status"></a> <a href="https://david-dm.org/winkjs/wink-perceptron?type=dev"><img src="https://david-dm.org/winkjs/wink-perceptron/dev-status.svg" alt="devDependencies Status"></a> <a href="https://gitter.im/winkjs/Lobby"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Gitter"></a></h3>
-<p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
-<p>Build machine learning models for prediction with dense or sparse data using <strong><code>wink-perceptron</code></strong>. It is a part of <a href="http://winkjs.org/">wink</a> — a growing family of high quality packages for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.</p>
-<h3>Installation</h3>
-<p>Use <a href="https://www.npmjs.com/package/wink-perceptron">npm</a> to install:</p>
-<pre><code>npm install wink-perceptron --save
-</code></pre>
-<h3>Documentation</h3>
-<p>Check out the <a href="http://winkjs.org/wink-perceptron/">perceptron API documentation</a> to learn more.</p>
-<h3>Need Help?</h3>
-<p>If you spot a bug and the same has not yet been reported, raise a new <a href="https://github.com/winkjs/wink-perceptron/issues">issue</a> or consider fixing it and sending a pull request.</p>
-<h3>Copyright &#x26; License</h3>
-<p><strong>wink-perceptron</strong> is copyright 2017-18 <a href="http://graype.in/">GRAYPE Systems Private Limited</a>.</p>
-<p>It is licensed under the under the terms of the GNU Affero General Public License as published by the Free
-Software Foundation, version 3 of the License.</p>
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Oct 16 2018 12:37:56 GMT+0530 (IST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
 
- 
-   
-  
-  
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
 
-  
-  
-  
-  
-  
-  
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-          
-            <div class='keyline-top-not py2'>
-  <section class='py2 clearfix'>
-
-    <h2 id='creating-an-instance' class='mt0'>
-      Creating an Instance
-    </h2>
-
-    
-      
-
-    
-  </section>
-</div>
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='creating-an-instance'>
-      Creating an Instance
-    </h3>
-    
-    
-  </div>
-  
-
-  
-
- 
-   
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='perceptron'>
-      perceptron
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Creates an instance of <strong><code>wink-perceptron</code></strong>.</p>
-
- 
-  
-    <div class='pre p1 fill-light mt0'>perceptron(): methods</div>
-   
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>methods</code>:
-        object conatining set of API methods for preceptron
-training, prediction, etc.
-
-      
-    
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Load wink perceptron.</span>
-<span class="hljs-keyword">var</span> perceptron = <span class="hljs-built_in">require</span>( <span class="hljs-string">'wink-perceptron'</span> );
-<span class="hljs-comment">// Create your instance of wink perceptron.</span>
-<span class="hljs-keyword">var</span> myPerceptron = perceptron();</pre>
-    
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-          
-            <div class='keyline-top-not py2'>
-  <section class='py2 clearfix'>
-
-    <h2 id='api-methods' class='mt0'>
-      API Methods
-    </h2>
-
-    
-      
-
-    
-  </section>
-</div>
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='api-methods'>
-      API Methods
-    </h3>
-    
-    
-  </div>
-  
-
-  
-
- 
-   
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='defineconfig'>
-      defineConfig
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Defines the hyperparameters for perceptron.</p>
-
- 
-  
-    <div class='pre p1 fill-light mt0'>defineConfig(config: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></div>
-   
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>config</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
-	    — table below details the properties of 
-<code>config</code>
- object.
-<p><em>An empty config object is equivalent to setting default configuration.</em></p>
-
-          </div>
-          
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>config.shuffleData</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
-  
-    (default <code>false</code>)
-  </td>
-  <td class='break-word'><span>determines whether or not the
-training examples should be randomly shuffled after each iteration a.k.a epoch.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>config.maxIterations</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>
-  
-    (default <code>9</code>)
-  </td>
-  <td class='break-word'><span>number of passes that must be made
-over the examples in order to complete the learning.
-</span></td>
-</tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>config.featureExtractor</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">function</a></code>
-  
-    (default <code>null</code>)
-  </td>
-  <td class='break-word'><span>extracts feature(s) along with the corresponding class label(s)
-from example prior to each iteration. This is useful when raw examples need to be
-passed to 
-<a href="#learn"><code>learn()</code></a>
- instead of features &#x26; labels. If it extracts >1 features
-then each of the extracted feature/label pair is processed sequentially during learning.
-Note 
-<code>shuffleData</code>
- value will only control the shuffling of input examples and
-not of the extracted features with this function.
-</span></td>
-</tr>
-
-
-              
-            </tbody>
-          </table>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></code>:
-        a copy of configuration defined.
-
-      
-    
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Enable random shuffling of examples!</span>
-myPerceptron.defineConfig( { <span class="hljs-attr">shuffleData</span>: <span class="hljs-literal">true</span> } );
-<span class="hljs-comment">// -&gt; { shuffleData: true, maxIterations: 9, featureExtractor: null }</span></pre>
-    
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='learn'>
-      learn
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Learns from the <strong>examples</strong>. The hyperparameters, defined via <a href="#defineconfig"><code>defineConfig</code></a>,
-control learning process.</p>
-
- 
-  
-    <div class='pre p1 fill-light mt0'>learn(examples: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a>>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
-   
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>examples</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a>>)</code>
-	    — each example is a 2-element array. The
-first element describes example's features and the second one defines
-its class label. Both of these are expressed in form of an object. The
-features object contains 
-<strong>name/numeric-value</strong>
- pairs for every feature, whereas the
-class label contains single name/string-value pair as 
-<code>{ label: &#x3C;class> }</code>
-.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
-        number of examples passed.
-
-      
-    
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'>myPerceptron.learn(  examples );</pre>
-    
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='predict'>
-      predict
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Predicts the label for the input <code>features</code>. If it is unable to predict then
-it returns a value <strong><code>unknown</code></strong>.</p>
-
- 
-  
-    <div class='pre p1 fill-light mt0'>predict(features: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
-   
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>features</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
-	    — object that contains 
-<strong>name/value</strong>
- pairs for every
-feature.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
-        predicted class label for the input 
-<code>features</code>
-.
-
-      
-    
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'>myPerceptron.predict( features );</pre>
-    
-  
-
-  
-
-  
-
-  
-</section>
-
-        
-      </div>
-    </div>
-  <script src='assets/anchor.js'></script>
-  <script src='assets/split.js'></script>
-  <script src='assets/site.js'></script>
 </body>
 </html>
