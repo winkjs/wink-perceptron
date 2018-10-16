@@ -37,9 +37,9 @@ var shuffleArray = helpers.array.shuffle;
 // ### wink-perceptron
 /**
  *
- * Creates an instance of **`wink-perceptron`**.
+ * Creates an instance of {@link Perceptron}..
  *
- * @return {methods} object conatining set of API methods for preceptron
+ * @return {Perceptron} Object conatining set of API methods for preceptron
  * training, prediction, etc.
  * @example
  * // Load wink perceptron.
@@ -76,7 +76,11 @@ var perceptron = function () {
   // at the `data` array level and not at feature level.
   var featureExtractor = null;
 
-  // Returns!
+  /**
+   * @classdesc Multi-class Averaged Perceptron  class.
+   * @class Perceptron
+   * @hideconstructor
+   */
   var methods = Object.create( null );
 
   // ### predict
@@ -85,10 +89,11 @@ var perceptron = function () {
    * Predicts the label for the input `features`. If it is unable to predict then
    * it returns a value **`unknown`**.
    *
-   * @param {object} features — object that contains **name/value** pairs for every
+   * @method Perceptron#predict
+   * @param {object} features object that contains **name/value** pairs for every
    * feature.
    *
-   * @return {string} predicted class label for the input `features`.
+   * @return {string} Predicted class label for the input `features`.
    * @example
    * myPerceptron.predict( features );
   */
@@ -238,18 +243,19 @@ var perceptron = function () {
   // ### learn
   /**
    *
-   * Learns from the **examples**. The hyperparameters, defined via [`defineConfig`](#defineconfig),
+   * Learns from the **examples**. The hyperparameters, defined via [`defineConfig`](#defineConfig),
    * control learning process.
    *
-   * @param {array[]} examples — each example is a 2-element array. The
+   * @method Perceptron#learn
+   * @param {array[]} examples each example is a 2-element array. The
    * first element describes example's features and the second one defines
    * its class label. Both of these are expressed in form of an object. The
    * features object contains **name/numeric-value** pairs for every feature, whereas the
    * class label contains single name/string-value pair as `{ label: <class> }`.
    *
-   * @return {number} number of examples passed.
+   * @return {number} Number of examples passed.
    * @example
-   * myPerceptron.learn(  examples );
+   * myPerceptron.learn( examples );
   */
   var learn = function ( examples ) {
     if ( typeof featureExtractor === 'function' ) {
@@ -265,9 +271,10 @@ var perceptron = function () {
    *
    * Defines the hyperparameters for perceptron.
    *
-   * @param {object} config — table below details the properties of `config` object.
+   * @method Perceptron#defineConfig
+   * @param {object} config table below details the properties of `config` object.
    *
-   * *An empty config object is equivalent to setting default configuration.*
+   * *An empty config object restores the default configuration.*
    *
    * @param {boolean} [config.shuffleData=false] determines whether or not the
    * training examples should be randomly shuffled after each iteration a.k.a epoch.
@@ -279,7 +286,7 @@ var perceptron = function () {
    * then each of the extracted feature/label pair is processed sequentially during learning.
    * Note `shuffleData` value will only control the shuffling of input examples and
    * not of the extracted features with this function.
-   * @return {object} a copy of configuration defined.
+   * @return {object} A copy of configuration defined.
    * @example
    * // Enable random shuffling of examples!
    * myPerceptron.defineConfig( { shuffleData: true } );
