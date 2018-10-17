@@ -39,10 +39,20 @@ var expect = chai.expect;
 var describe = mocha.describe;
 var it = mocha.it;
 
+const METHODS = 3;
+
 // Extracts features from a single row of data.
 var extractFeatures = function ( e ) {
  return ( [ [ { sl: +e[ 0 ], sw: +e[ 1 ], pl: +e[ 2 ], pw: +e[ 3 ] }, { label: e[ 4 ] } ] ] );
 }; // extractFeatures()
+
+// Text Data.
+var intents = [
+  [ { i: 1, need: 1, loan: 1, for: 1, a: 1, new: 1, car: 1 }, { label: 'autoloan' } ],
+  [ { i: 1, need: 1, to: 1, borrow: 1, for: 1, a: 1, new: 1, car: 1 }, { label: 'autoloan' } ],
+  [ { i: 1, would: 1, like: 1, to: 1, foreclose: 1, my: 1, loan: 1 }, { label: 'prepay' } ],
+  [ { i: 1, want: 1, to: 1, prepay: 1, my: 1, loan: 1 }, { label: 'prepay' } ]
+];
 
 // IRIS Data is sourced from UC Irvine Machine Learning Repository;
 // source: https://archive.ics.uci.edu/ml/datasets/iris
@@ -73,8 +83,8 @@ td.forEach( function ( e ) {
 
 // Tests
 describe( 'instantiate perceptron', function () {
-  it( 'must return 3 methods', function () {
-    expect( Object.keys( perceptron() ).length ).to.equal( 3 );
+  it( 'must return ' + METHODS + ' methods', function () {
+    expect( Object.keys( perceptron() ).length ).to.equal( METHODS );
   } );
 } );
 
@@ -122,8 +132,8 @@ describe( 'train & predict using from raw iris data', function () {
   var p = perceptron();
 
   it( 'defineConfig must return the config in force', function () {
-    expect( p.defineConfig( { maxIterations: 210, featureExtractor: extractFeatures } ) )
-      .to.deep.equal( { shuffleData: false, maxIterations: 210, featureExtractor: extractFeatures } );
+    expect( p.defineConfig( { maxIterations: 21, featureExtractor: extractFeatures, shuffleData: true } ) )
+      .to.deep.equal( { shuffleData: true, maxIterations: 21, featureExtractor: extractFeatures } );
   } );
 
   it( 'learn must return 120', function () {
@@ -141,12 +151,6 @@ describe( 'train & predict using from raw iris data', function () {
 
 describe( 'train & predict intent using from text data', function () {
   var p = perceptron();
-  var intents = [
-    [ { i: 1, need: 1, loan: 1, for: 1, a: 1, new: 1, car: 1 }, { label: 'autoloan' } ],
-    [ { i: 1, need: 1, to: 1, borrow: 1, for: 1, a: 1, new: 1, car: 1 }, { label: 'autoloan' } ],
-    [ { i: 1, would: 1, like: 1, to: 1, foreclose: 1, my: 1, loan: 1 }, { label: 'prepay' } ],
-    [ { i: 1, want: 1, to: 1, prepay: 1, my: 1, loan: 1 }, { label: 'prepay' } ]
-  ];
 
   it( 'defineConfig must return the config in force', function () {
     expect( p.defineConfig( { shuffleData: true } ) )
@@ -166,7 +170,8 @@ describe( 'train & predict for tie in class scores', function () {
   var p = perceptron();
   var data = [
     [ { bad: 1 }, { label: 'L0' } ],
-    [ { good: 1 }, { label: 'L1' } ]
+    [ { good: 1 }, { label: 'L1' } ],
+    [ { bad: 1, good: 1 }, { label: 'L1' } ]
   ];
 
   it( 'defineConfig must return the config in force', function () {
@@ -174,11 +179,11 @@ describe( 'train & predict for tie in class scores', function () {
       .to.deep.equal( { shuffleData: false, maxIterations: 1, featureExtractor: null } );
   } );
 
-  it( 'learn must return 2', function () {
-    expect( p.learn( data ) ).to.equal( 2 );
+  it( 'learn must return 3', function () {
+    expect( p.learn( data ) ).to.equal( 3 );
   } );
 
-  it( 'must predict label L1', function () {
-    expect( p.predict( { bad: 1, good: 1 } ) ).to.equal( 'L1' );
-  } );
+  it( 'must predict label L0', function () {
+    expect( p.predict( { bad: 1, good: 1 } ) ).to.equal( 'L0' );
+} );
 } );

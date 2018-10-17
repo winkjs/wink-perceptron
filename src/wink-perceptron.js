@@ -37,7 +37,7 @@ var shuffleArray = helpers.array.shuffle;
 // ### wink-perceptron
 /**
  *
- * Creates an instance of {@link Perceptron}..
+ * Creates an instance of {@link Perceptron}.
  *
  * @return {Perceptron} Object conatining set of API methods for preceptron
  * training, prediction, etc.
@@ -48,6 +48,8 @@ var shuffleArray = helpers.array.shuffle;
  * var myPerceptron = perceptron();
 */
 var perceptron = function () {
+  // Learning Variables.
+  // These are re-initialized in the `reset()` method.
   // The weights matrix with **features** x **classes** dimensions.
   var weights = Object.create( null );
   // Bias for every **class**.
@@ -56,8 +58,14 @@ var perceptron = function () {
   // is computed by dividing the accumulated sums by updates.
   // Sum of weights used for comuting average weight.
   var sumOfWts = Object.create( null );
+  // Alias for above: during call to `averageBalance()` sum is divided by updates
+  // to turn it into average.
+  var avgWts = sumOfWts;
   // Sum of biases used for computing average bias.
   var sumOfBiases = Object.create( null );
+  // Alias for above: during call to `averageBalance()` sum is divided by updates
+  // to turn it into average.
+  var avgBiases = sumOfBiases;
   // Captures the last moment/epoch when an update of weight for a class/feature
   // combo has occurred. The moment/epoch here is nothing but the update number.
   var lastWtUpdatedAt = Object.create( null );
@@ -66,7 +74,7 @@ var perceptron = function () {
   // The number of updates.
   var updates = 0;
 
-  // Configuration variables and their default values.
+  // Configuration Variables and their default values.
   // Maximum number of learning iterations.
   var maxIterations = 9;
   // True means data will be shuffled after every iteration.
@@ -83,21 +91,7 @@ var perceptron = function () {
    */
   var methods = Object.create( null );
 
-  // ### predict
-  /**
-   *
-   * Predicts the label for the input `features`. If it is unable to predict then
-   * it returns a value **`unknown`**.
-   *
-   * @method Perceptron#predict
-   * @param {object} features object that contains **name/value** pairs for every
-   * feature.
-   *
-   * @return {string} Predicted class label for the input `features`.
-   * @example
-   * myPerceptron.predict( features );
-  */
-  var predict = function ( features ) {
+  var predictWithSpecificWeights = function ( features, specificWeights, specificBiases ) {
     // Scores, index by **class**.
     var scores = Object.create( null );
     // Helper variables for class, feature, it's value and weight.
@@ -110,11 +104,11 @@ var perceptron = function () {
     // Compute scores for each class; will add bias later when we just loop for
     // classes while finding the maximum score.
     for ( f in features ) {
-      w = weights[ f ];
+      w = specificWeights[ f ];
       v = features[ f ];
       // Check if weights for that featues exist and feature value is **non-zero**.
       if ( w && v ) {
-        for ( c in weights[ f ] ) {
+        for ( c in specificWeights[ f ] ) {
           scores[ c ] = ( scores[ c ] || 0 ) + ( v * w[ c ] );
         }
       }
@@ -122,7 +116,7 @@ var perceptron = function () {
     // Find the best class with the maximum score.
     for ( c in scores ) {
       // Add bias at this stage.
-      v = scores[ c ] + biases[ c ];
+      v = scores[ c ] + specificBiases[ c ];
       if ( v > pv ) {
         pc = c;
         pv = v;
@@ -133,7 +127,7 @@ var perceptron = function () {
     }
 
     return ( pc || 'unknown' );
-  }; // predict()
+  }; // predict1()
 
   var adjustWt = function ( f, v, c ) {
     var w = ( weights[ f ][ c ] || 0 );
@@ -163,14 +157,16 @@ var perceptron = function () {
       for ( c in weights[ f ] ) {
         w = weights[ f ][ c ];
         sumOfWts[ f ][ c ] = ( sumOfWts[ f ][ c ] || 0 ) + ( ( updates - lastWtUpdatedAt[ f ][ c ] ) * w );
-        sumOfWts[ f ][ c ] = +( sumOfWts[ f ][ c ] / updates ).toFixed( 3 );
+        // Compute average of weights.
+        avgWts[ f ][ c ] = +( sumOfWts[ f ][ c ] / updates ).toFixed( 3 );
       }
     }
     // Process biases.
     for ( c in biases ) {
       b = biases[ c ];
       sumOfBiases[ c ] = ( sumOfBiases[ c ] || 0 ) + ( ( updates - lastBsUpdatedAt[ c ] ) * b );
-      sumOfBiases[ c ] = +( sumOfBiases[ c ] / updates ).toFixed( 3 );
+      // Compute average of biases.
+      avgBiases[ c ] = +( sumOfBiases[ c ] / updates ).toFixed( 3 );
     }
   }; // averageBalance()
 
@@ -207,7 +203,7 @@ var perceptron = function () {
     // Starting from **1** ensures that we iterate **maxIterations** times.
     for ( j = 0; j < maxIterations; j += 1 ) {
       for ( k = 0; k < data.length; k += 1 ) {
-        guess = predict( data[ k ][ 0 ] );
+        guess = predictWithSpecificWeights( data[ k ][ 0 ], weights, biases );
         if ( guess !== data[ k ][ 1 ].label ) adjustWeights( data[ k ], guess );
       } // for data.length
       // Random shuffle of the data — critical for perceptron learning.
@@ -229,7 +225,7 @@ var perceptron = function () {
       for ( k = 0; k < data.length; k += 1 ) {
         features = featureExtractor( data[ k ] );
         for ( l = 0; l < features.length; l += 1 ) {
-          guess = predict( features[ l ][ 0 ] );
+          guess = predictWithSpecificWeights( features[ l ][ 0 ], weights, biases );
           if ( guess !== features[ l ][ 1 ].label ) adjustWeights( features[ l ], guess );
         } // for features.length
       } // for data.length
@@ -265,6 +261,25 @@ var perceptron = function () {
     }
     return ( examples.length );
   }; // learn()
+
+  // ### predict
+  /**
+   *
+   * Predicts the label for the input `features`. If it is unable to predict then
+   * it returns a value **`unknown`**.
+   *
+   * @method Perceptron#predict
+   * @param {object} features object that contains **name/value** pairs for every
+   * feature.
+   *
+   * @return {string} Predicted class label for the input `features`.
+   * @example
+   * myPerceptron.predict( features );
+  */
+  var predict = function ( features ) {
+    // Use averaged weights.
+    return predictWithSpecificWeights( features, avgWts, avgBiases );
+  }; // predict()
 
   // ### defineConfig
   /**
