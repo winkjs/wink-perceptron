@@ -91,7 +91,24 @@ var perceptron = function () {
    */
   var methods = Object.create( null );
 
-  var predictWithSpecificWeights = function ( features, specificWeights, specificBiases ) {
+  // ### predictUsingSpecificWeights
+  /**
+   *
+   * Predicts the label for the input `features` using the `specificWeights` and
+   * `specificBiases`. For example during learning process `weights` and `biases`
+   * are used.
+   *
+   * If it is unable to predict then it returns a value **`unknown`**.
+   *
+   * @private
+   * @param {object} features object that contains **name/value** pairs for every
+   * feature.
+   * @param {object} specificWeights these are either `weights` or `avgWts`.
+   * @param {object} specificBiases these are either `biases` or `avgBiases`.
+   *
+   * @return {string} Predicted class label for the input `features`.
+  */
+  var predictUsingSpecificWeights = function ( features, specificWeights, specificBiases ) {
     // Scores, index by **class**.
     var scores = Object.create( null );
     // Helper variables for class, feature, it's value and weight.
@@ -127,7 +144,7 @@ var perceptron = function () {
     }
 
     return ( pc || 'unknown' );
-  }; // predict1()
+  }; // predictUsingSpecificWeights()
 
   var adjustWt = function ( f, v, c ) {
     var w = ( weights[ f ][ c ] || 0 );
@@ -203,7 +220,7 @@ var perceptron = function () {
     // Starting from **1** ensures that we iterate **maxIterations** times.
     for ( j = 0; j < maxIterations; j += 1 ) {
       for ( k = 0; k < data.length; k += 1 ) {
-        guess = predictWithSpecificWeights( data[ k ][ 0 ], weights, biases );
+        guess = predictUsingSpecificWeights( data[ k ][ 0 ], weights, biases );
         if ( guess !== data[ k ][ 1 ].label ) adjustWeights( data[ k ], guess );
       } // for data.length
       // Random shuffle of the data — critical for perceptron learning.
@@ -225,7 +242,7 @@ var perceptron = function () {
       for ( k = 0; k < data.length; k += 1 ) {
         features = featureExtractor( data[ k ] );
         for ( l = 0; l < features.length; l += 1 ) {
-          guess = predictWithSpecificWeights( features[ l ][ 0 ], weights, biases );
+          guess = predictUsingSpecificWeights( features[ l ][ 0 ], weights, biases );
           if ( guess !== features[ l ][ 1 ].label ) adjustWeights( features[ l ], guess );
         } // for features.length
       } // for data.length
@@ -278,7 +295,7 @@ var perceptron = function () {
   */
   var predict = function ( features ) {
     // Use averaged weights.
-    return predictWithSpecificWeights( features, avgWts, avgBiases );
+    return predictUsingSpecificWeights( features, avgWts, avgBiases );
   }; // predict()
 
   // ### defineConfig
