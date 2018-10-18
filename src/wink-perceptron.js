@@ -73,6 +73,8 @@ var perceptron = function () {
   var lastBsUpdatedAt = Object.create( null );
   // The number of updates.
   var updates = 0;
+  // Number of examples seen.
+  var examplesSeen = 0;
 
   // Configuration Variables and their default values.
   // Maximum number of learning iterations.
@@ -269,6 +271,7 @@ var perceptron = function () {
    * @return {number} Number of examples passed.
    * @example
    * myPerceptron.learn( examples );
+   * @throws Error if all `examples` belong to only a single class.
   */
   var learn = function ( examples ) {
     if ( typeof featureExtractor === 'function' ) {
@@ -276,7 +279,13 @@ var perceptron = function () {
     } else {
       learnFromData( examples );
     }
-    return ( examples.length );
+
+    if ( ( Object.keys( sumOfBiases ) ).length < 2 ) {
+      throw Error( 'wink-perceptron: there must be at least 2 classes in examples' );
+    }
+
+    examplesSeen = examples.length;
+    return ( examplesSeen );
   }; // learn()
 
   // ### predict
@@ -292,8 +301,13 @@ var perceptron = function () {
    * @return {string} Predicted class label for the input `features`.
    * @example
    * myPerceptron.predict( features );
+   * @throws Error if prediction is attempted without [learning](#learn).
   */
   var predict = function ( features ) {
+    if ( examplesSeen === 0 ) {
+      throw Error( 'wink-perceptron: prediction is not possible without learning!' );
+    }
+
     // Use averaged weights.
     return predictUsingSpecificWeights( features, avgWts, avgBiases );
   }; // predict()
@@ -368,6 +382,7 @@ var perceptron = function () {
     lastWtUpdatedAt = Object.create( null );
     lastBsUpdatedAt = Object.create( null );
     updates = 0;
+    examplesSeen = 0;
     // Setup aliases.
     avgWts = sumOfWts;
     avgBiases = sumOfBiases;

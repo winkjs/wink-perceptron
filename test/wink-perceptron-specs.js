@@ -212,12 +212,9 @@ describe( 'reset must unlearn every thing', function () {
     expect( p.reset( ) ).to.equal( true );
   } );
 
-  it( 'must predict nil accuracy in test data post the reset', function () {
-    var pass = 0;
-    testData.forEach( function ( e ) {
-      if ( p.predict( e[ 0 ] ) === e[ 1 ].label ) pass += 1;
-    } );
-    expect( pass / testData.length === 0 ).to.equal( true );
+  it( 'must throw error on prediction without learning after reset', function () {
+    expect( perceptron().predict.bind( undefined, testData[ 0 ][ 0 ] ) )
+      .to.throw( 'wink-perceptron: prediction is not possible without learning!' );
   } );
 
   it( 'defineConfig must return the newly set config', function () {
@@ -233,11 +230,9 @@ describe( 'reset must unlearn every thing', function () {
     expect( p.predict( { need: 1, to: 1, borrow: 1, money: 1, for: 1, a: 1, new: 1, vehicle: 1 } ) ).to.equal( 'autoloan' );
   } );
 
-  it( 'reset must return true', function () {
+  it( 'must throw error on learning with examples containing single class after reset', function () {
     expect( p.reset( ) ).to.equal( true );
-  } );
-
-  it( 'must predict unknown', function () {
-    expect( p.predict( { need: 1, to: 1, borrow: 1, money: 1, for: 1, a: 1, new: 1, vehicle: 1 } ) ).to.equal( 'unknown' );
+    expect( perceptron().learn.bind( undefined, [ [ { i: 1, need: 1, loan: 1, for: 1, a: 1, new: 1, car: 1 }, { label: 'autoloan' } ] ] ) )
+      .to.throw( 'wink-perceptron: there must be at least 2 classes in examples' );
   } );
 } );
