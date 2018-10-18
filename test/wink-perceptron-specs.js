@@ -39,7 +39,7 @@ var expect = chai.expect;
 var describe = mocha.describe;
 var it = mocha.it;
 
-const METHODS = 3;
+const METHODS = 4;
 
 // Extracts features from a single row of data.
 var extractFeatures = function ( e ) {
@@ -119,7 +119,7 @@ describe( 'train & predict using extracted features from iris data', function ()
     expect( p.learn( trainingData ) ).to.equal( 120 );
   } );
 
-  it( 'must predict with >90% accuracy test data', function () {
+  it( 'must predict with >90% accuracy in test data', function () {
     var pass = 0;
     testData.forEach( function ( e ) {
       if ( p.predict( e[ 0 ] ) === e[ 1 ].label ) pass += 1;
@@ -140,7 +140,7 @@ describe( 'train & predict using from raw iris data', function () {
     expect( p.learn( rawTrainingData ) ).to.equal( 120 );
   } );
 
-  it( 'must predict with >90% accuracy test data', function () {
+  it( 'must predict with >90% accuracy in test data', function () {
     var pass = 0;
     testData.forEach( function ( e ) {
       if ( p.predict( e[ 0 ] ) === e[ 1 ].label ) pass += 1;
@@ -185,5 +185,59 @@ describe( 'train & predict for tie in class scores', function () {
 
   it( 'must predict label L0', function () {
     expect( p.predict( { bad: 1, good: 1 } ) ).to.equal( 'L0' );
+  } );
 } );
+
+describe( 'reset must unlearn every thing', function () {
+  var p = perceptron();
+
+  it( 'defineConfig must return the config in force', function () {
+    expect( p.defineConfig( { maxIterations: 21, featureExtractor: extractFeatures, shuffleData: true } ) )
+      .to.deep.equal( { shuffleData: true, maxIterations: 21, featureExtractor: extractFeatures } );
+  } );
+
+  it( 'learn must return 120', function () {
+    expect( p.learn( rawTrainingData ) ).to.equal( 120 );
+  } );
+
+  it( 'must predict with >90% accuracy in test data', function () {
+    var pass = 0;
+    testData.forEach( function ( e ) {
+      if ( p.predict( e[ 0 ] ) === e[ 1 ].label ) pass += 1;
+    } );
+    expect( pass / testData.length > 0.9 ).to.equal( true );
+  } );
+
+  it( 'reset must return true', function () {
+    expect( p.reset( ) ).to.equal( true );
+  } );
+
+  it( 'must predict nil accuracy in test data post the reset', function () {
+    var pass = 0;
+    testData.forEach( function ( e ) {
+      if ( p.predict( e[ 0 ] ) === e[ 1 ].label ) pass += 1;
+    } );
+    expect( pass / testData.length === 0 ).to.equal( true );
+  } );
+
+  it( 'defineConfig must return the newly set config', function () {
+    expect( p.defineConfig( { shuffleData: true, maxIterations: 9, featureExtractor: null } ) )
+      .to.deep.equal( { shuffleData: true, maxIterations: 9, featureExtractor: null } );
+  } );
+
+  it( 'learn must return 4', function () {
+    expect( p.learn( intents ) ).to.equal( 4 );
+  } );
+
+  it( 'must predict autoloan', function () {
+    expect( p.predict( { need: 1, to: 1, borrow: 1, money: 1, for: 1, a: 1, new: 1, vehicle: 1 } ) ).to.equal( 'autoloan' );
+  } );
+
+  it( 'reset must return true', function () {
+    expect( p.reset( ) ).to.equal( true );
+  } );
+
+  it( 'must predict unknown', function () {
+    expect( p.predict( { need: 1, to: 1, borrow: 1, money: 1, for: 1, a: 1, new: 1, vehicle: 1 } ) ).to.equal( 'unknown' );
+  } );
 } );

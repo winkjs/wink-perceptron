@@ -337,7 +337,7 @@ var perceptron = function () {
       throw Error( 'wink-perceptron: maxIterations should be >1' );
     }
     // Ordered Set Of Features Extractor function; default is none!
-    featureExtractor = config.featureExtractor || featureExtractor;
+    featureExtractor = ( config.featureExtractor === undefined ) ? featureExtractor : config.featureExtractor;
     if ( ( featureExtractor !== null ) && ( typeof featureExtractor !== 'function' )  ) {
       throw Error( 'wink-perceptron: featureExtractor must be a function, instead found: ' + ( typeof featureExtractor ) );
     }
@@ -345,9 +345,40 @@ var perceptron = function () {
     return ( { shuffleData: shuffleData, maxIterations: maxIterations, featureExtractor: featureExtractor } );
   }; // defineConfig()
 
+// ### reset
+  /**
+   * It completely resets the perceptron by re-initializing all the learning
+   * related variables but does not touch the existing configuration.
+   *
+   * *Since it does not reset the existing configuration, user must define it
+   * again prior to learning if required.*
+   *
+   * @method Perceptron#reset
+   * @return {boolean} Always true.
+   * @example
+   * myPerceptron.reset();
+   * // -> true
+  */
+  var reset = function () {
+    // Initialize learning variables.
+    weights = Object.create( null );
+    biases = Object.create( null );
+    sumOfWts = Object.create( null );
+    sumOfBiases = Object.create( null );
+    lastWtUpdatedAt = Object.create( null );
+    lastBsUpdatedAt = Object.create( null );
+    updates = 0;
+    // Setup aliases.
+    avgWts = sumOfWts;
+    avgBiases = sumOfBiases;
+    // Always true!
+    return true;
+  }; // reset()
+
   methods.defineConfig = defineConfig;
   methods.learn = learn;
   methods.predict = predict;
+  methods.reset = reset;
   // methods.show = function () { console.log(sumOfWts); console.log(sumOfBiases); console.log( updates ); }; // eslint-disable-line
   return ( methods );
 }; // perceptron()
