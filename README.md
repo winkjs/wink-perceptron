@@ -21,7 +21,9 @@ Here is an example of predicting type of iris plant from the Iris Data Set.
 // Load training data from Iris Data Set obtained from
 // UCI Machine Learning Repository; it has been converted
 // into JSON format.
-const trainingData = require( '../sample-data/iris-train.json' );
+// You may need to update the path in the "require" statement
+// according to your working directory.
+const trainingData = require( 'wink-perceptron/sample-data/iris-train.json' );
 // Initialize a test data sample.
 const testData = {
   setosa: { sepalLength: 4.9, sepalWidth: 3, petalLength: 1.4, petalWidth: 0.2 },
@@ -30,7 +32,7 @@ const testData = {
 };
 
 // Load wink perceptron.
-var winkPerceptron = require( '../src/wink-perceptron.js' );
+var winkPerceptron = require( 'wink-perceptron' );
 // Instantiate wink perceptron.
 var perceptron = winkPerceptron();
 // Define configurtaion.
