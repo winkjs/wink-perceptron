@@ -2,7 +2,7 @@
 
 // Load training data from Iris Data Set obtained
 // from UCI Machine Learning Repository.
-const trainingData = require( '../sample-data/iris-train.json' );
+const trainingData = require( 'wink-perceptron/sample-data/iris-train.json' );
 // Initialize a test data sample.
 const testData = {
   setosa: { sepalLength: 4.9, sepalWidth: 3, petalLength: 1.4, petalWidth: 0.2 },
@@ -11,7 +11,7 @@ const testData = {
 };
 
 // Load wink perceptron.
-var winkPerceptron = require( '../src/wink-perceptron.js' );
+var winkPerceptron = require( 'wink-perceptron.js' );
 // Instantiate wink perceptron.
 var perceptron = winkPerceptron();
 // Define configurtaion.
