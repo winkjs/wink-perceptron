@@ -1,23 +1,28 @@
-//     wink-perceptron
-//     Multi-class averaged perceptron
-//
-//     Copyright (C) 2017-18  GRAYPE Systems Private Limited
-//
-//     This file is part of “wink-perceptron”.
-//
-//     “wink-perceptron” is free software: you can redistribute it
-//     and/or modify it under the terms of the GNU Affero
-//     General Public License as published by the Free
-//     Software Foundation, version 3 of the License.
-//
-//     “wink-perceptron” is distributed in the hope that it will
-//     be useful, but WITHOUT ANY WARRANTY; without even
-//     the implied warranty of MERCHANTABILITY or FITNESS
-//     FOR A PARTICULAR PURPOSE.  See the GNU Affero General
-//     Public License for more details.
-//
-//     You should have received a copy of the GNU Affero
-//     General Public License along with “wink-perceptron”.
-//     If not, see <http://www.gnu.org/licenses/>.
+/* eslint-disable no-console */
 
-//
+// Load training data from Iris Data Set obtained
+// from UCI Machine Learning Repository.
+const trainingData = require( '../sample-data/iris-train.json' );
+// Initialize a test data sample.
+const testData = {
+  setosa: { sepalLength: 4.9, sepalWidth: 3, petalLength: 1.4, petalWidth: 0.2 },
+  versicolor: { sepalLength: 6.4, sepalWidth: 3.2, petalLength: 4.5, petalWidth: 1.5 },
+  virginica: { sepalLength: 7.2, sepalWidth: 3.6, petalLength: 6.1, petalWidth: 2.5 }
+};
+
+// Load wink perceptron.
+var winkPerceptron = require( '../src/wink-perceptron.js' );
+// Instantiate wink perceptron.
+var perceptron = winkPerceptron();
+// Define configurtaion.
+perceptron.defineConfig( { shuffleData: true, maxIterations: 21 } );
+// Learn from training data.
+perceptron.learn( trainingData );
+
+// Attempt prediction for each iris plant type.
+console.log( perceptron.predict( testData.setosa ) );
+// -> Iris-setosa
+console.log( perceptron.predict( testData.versicolor ) );
+// -> Iris-versicolor
+console.log( perceptron.predict( testData.virginica ) );
+// -> Iris-virginica
