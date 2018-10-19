@@ -11,7 +11,7 @@ const testData = {
 };
 
 // Load wink perceptron.
-var winkPerceptron = require( 'wink-perceptron.js' );
+var winkPerceptron = require( 'wink-perceptron' );
 // Instantiate wink perceptron.
 var perceptron = winkPerceptron();
 // Define configurtaion.
