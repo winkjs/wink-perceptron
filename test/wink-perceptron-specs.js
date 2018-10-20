@@ -141,6 +141,11 @@ describe( 'train & predict using extracted features from iris data', function ()
 describe( 'train & predict using from raw iris data', function () {
   var p = perceptron();
 
+  it( 'must throw error on export without learning', function () {
+    expect( p.exportJSON.bind( undefined ) )
+      .to.throw( 'wink-perceptron: nothing to export, learning is a prerequisite!' );
+  } );
+
   it( 'defineConfig must return the config in force', function () {
     expect( p.defineConfig( { maxIterations: 21, featureExtractor: extractFeatures, shuffleData: true } ) )
       .to.deep.equal( { shuffleData: true, maxIterations: 21, featureExtractor: extractFeatures } );
@@ -227,8 +232,13 @@ describe( 'reset must unlearn every thing', function () {
   } );
 
   it( 'must throw error on prediction without learning after reset', function () {
-    expect( perceptron().predict.bind( undefined, testData[ 0 ][ 0 ] ) )
+    expect( p.predict.bind( undefined, testData[ 0 ][ 0 ] ) )
       .to.throw( 'wink-perceptron: prediction is not possible without learning!' );
+  } );
+
+  it( 'must throw error on export after reset', function () {
+    expect( p.exportJSON.bind( undefined ) )
+      .to.throw( 'wink-perceptron: nothing to export, learning is a prerequisite!' );
   } );
 
   it( 'defineConfig must return the newly set config', function () {

@@ -273,7 +273,8 @@ var perceptron = function () {
    * @return {number} Number of examples passed.
    * @example
    * myPerceptron.learn( examples );
-   * @throws Error if all `examples` belong to only **one** class.
+   * @throws Error if all `examples` belong to only **one** class OR if attempted
+   * after [`importJSON()`](#importJSON).
   */
   var learn = function ( examples ) {
     if ( imported ) {
@@ -307,7 +308,7 @@ var perceptron = function () {
    * @return {string} Predicted class label for the input `features`.
    * @example
    * myPerceptron.predict( features );
-   * @throws Error if prediction is attempted without [learning](#learn).
+   * @throws Error if prediction is attempted without [learning](#learn) or [import](#importJSON).
   */
   var predict = function ( features ) {
     if ( !imported && examplesSeen === 0 ) {
@@ -405,10 +406,16 @@ var perceptron = function () {
    * @method Perceptron#exportJSON
    * @return {string} Learning in JSON format.
    * @example
+   * // Assuming that learn() method has been already succesful.
    * myPerceptron.exportJSON();
-   * // returns JSON.
+   * // -> JSON string.
+   * @throws Error if export is attempted without [learning](#learn).
   */
   var exportJSON = function ( ) {
+    if ( examplesSeen === 0 ) {
+      throw Error( 'wink-perceptron: nothing to export, learning is a prerequisite!' );
+    }
+
     return (
       JSON.stringify( [
         avgWts,
@@ -420,20 +427,20 @@ var perceptron = function () {
     );
   }; // exportJSON()
 
-  // Imports the `json` in to learnings after validating the format of input JSON.
- // If validation fails then throws error; otherwise on success import it
- // returns `true`. Note, importing leads to resetting the classifier.
- /**
-  * Imports an existing JSON learning for prediction.
-  * It is essential to [`definePrepTasks()`]()#definepreptasks and
-  * [`consolidate()`](#consolidate) before attempting to predict.
+  // ### importJSON
+  /**
+  * Imports an existing JSON learning for prediction purpose **only**; it cannot
+  * be used for further [learning](#learn).
   *
   * @method Perceptron#importJSON
   * @param {JSON} json containing learnings in as exported by [`exportJSON`](#exportjson).
   * @return {boolean} Always true.
+  * @example
+  * // Assuming that `json` already has a valid JSON string.
+  * myPerceptron.importJSON( json );
   * @throws Error if `json` is invalid.
- */
- var importJSON = function ( json ) {
+  */
+  var importJSON = function ( json ) {
    var parsedJSON;
    if ( !json ) {
      throw Error( 'wink-perceptron: undefined or null JSON encountered, import failed!' );
@@ -469,7 +476,7 @@ var perceptron = function () {
    // Return success.
    imported = true;
    return true;
-}; // importJSON()
+  }; // importJSON()
 
   methods.defineConfig = defineConfig;
   methods.learn = learn;

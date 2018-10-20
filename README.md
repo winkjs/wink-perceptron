@@ -23,7 +23,7 @@ Here is an example of predicting type of iris plant from the [Iris Data Set](htt
 // into JSON format.
 // You may need to update the path in the "require" statement
 // according to your working directory.
-const trainingData = require( 'wink-perceptron/sample-data/iris-train.json' );
+const trainingExamples = require( 'wink-perceptron/sample-data/iris-train.json' );
 // Initialize a test data sample.
 const testData = {
   setosa: { sepalLength: 4.9, sepalWidth: 3, petalLength: 1.4, petalWidth: 0.2 },
@@ -38,7 +38,7 @@ var perceptron = winkPerceptron();
 // Define configurtaion.
 perceptron.defineConfig( { shuffleData: true, maxIterations: 21 } );
 // Learn from training data.
-perceptron.learn( trainingData );
+perceptron.learn( trainingExamples );
 
 // Attempt prediction for each iris plant type.
 console.log( perceptron.predict( testData.setosa ) );
