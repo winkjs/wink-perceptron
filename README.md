@@ -15,10 +15,10 @@ Use [npm](https://www.npmjs.com/package/wink-perceptron) to install:
     npm install wink-perceptron --save
 
 ### Getting Started
-Here is an example of predicting type of iris plant from the Iris Data Set.
+Here is an example of predicting type of iris plant from the [Iris Data Set](https://archive.ics.uci.edu/ml/datasets/iris).
 
 ```javascript
-// Load training data from Iris Data Set obtained from
+// Load training data — the Iris Data Set obtained from
 // UCI Machine Learning Repository; it has been converted
 // into JSON format.
 // You may need to update the path in the "require" statement
@@ -58,7 +58,7 @@ Check out the [perceptron API documentation](http://winkjs.org/wink-perceptron/)
 If you spot a bug and the same has not yet been reported, raise a new [issue](https://github.com/winkjs/wink-perceptron/issues) or consider fixing it and sending a pull request.
 
 ### About wink
-[Wink](http://winkjs.org/) is a growing family of high quality [packages](http://winkjs.org/packages.html) for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.
+[Wink](http://winkjs.org/) is a growing family of high quality [packages](http://winkjs.org/packages.html) for **Statistical Analysis**, **Natural Language Processing** and **Machine Learning** in NodeJS. The code is throughly documented for easy comprehension and has a test coverage of ~100% for reliability.
 
 ### Copyright & License
 

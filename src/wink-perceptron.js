@@ -75,6 +75,8 @@ var perceptron = function () {
   var updates = 0;
   // Number of examples seen.
   var examplesSeen = 0;
+  // Imported flag to allow prediction without learning.
+  var imported = false;
 
   // Configuration Variables and their default values.
   // Maximum number of learning iterations.
@@ -271,9 +273,13 @@ var perceptron = function () {
    * @return {number} Number of examples passed.
    * @example
    * myPerceptron.learn( examples );
-   * @throws Error if all `examples` belong to only a single class.
+   * @throws Error if all `examples` belong to only **one** class.
   */
   var learn = function ( examples ) {
+    if ( imported ) {
+      throw Error( 'wink-perceptron: learnings already imported.' );
+    }
+
     if ( typeof featureExtractor === 'function' ) {
       learnFromExtractedFeatures( examples );
     } else {
@@ -281,7 +287,7 @@ var perceptron = function () {
     }
 
     if ( ( Object.keys( sumOfBiases ) ).length < 2 ) {
-      throw Error( 'wink-perceptron: there must be at least 2 classes in examples' );
+      throw Error( 'wink-perceptron: there must be at least 2 classes in examples.' );
     }
 
     examplesSeen = examples.length;
@@ -304,7 +310,7 @@ var perceptron = function () {
    * @throws Error if prediction is attempted without [learning](#learn).
   */
   var predict = function ( features ) {
-    if ( examplesSeen === 0 ) {
+    if ( !imported && examplesSeen === 0 ) {
       throw Error( 'wink-perceptron: prediction is not possible without learning!' );
     }
 
@@ -359,7 +365,7 @@ var perceptron = function () {
     return ( { shuffleData: shuffleData, maxIterations: maxIterations, featureExtractor: featureExtractor } );
   }; // defineConfig()
 
-// ### reset
+  // ### reset
   /**
    * It completely resets the perceptron by re-initializing all the learning
    * related variables but does not touch the existing configuration.
@@ -383,6 +389,7 @@ var perceptron = function () {
     lastBsUpdatedAt = Object.create( null );
     updates = 0;
     examplesSeen = 0;
+    imported = false;
     // Setup aliases.
     avgWts = sumOfWts;
     avgBiases = sumOfBiases;
@@ -390,10 +397,86 @@ var perceptron = function () {
     return true;
   }; // reset()
 
+  // ### exportJSON
+  /**
+   * Exports the learning as a JSON, which may be saved as a text file for
+   * later use via [`importJSON()`](#importJSON).
+   *
+   * @method Perceptron#exportJSON
+   * @return {string} Learning in JSON format.
+   * @example
+   * myPerceptron.exportJSON();
+   * // returns JSON.
+  */
+  var exportJSON = function ( ) {
+    return (
+      JSON.stringify( [
+        avgWts,
+        avgBiases,
+        // For future expansion...
+        {},
+        []
+      ] )
+    );
+  }; // exportJSON()
+
+  // Imports the `json` in to learnings after validating the format of input JSON.
+ // If validation fails then throws error; otherwise on success import it
+ // returns `true`. Note, importing leads to resetting the classifier.
+ /**
+  * Imports an existing JSON learning for prediction.
+  * It is essential to [`definePrepTasks()`]()#definepreptasks and
+  * [`consolidate()`](#consolidate) before attempting to predict.
+  *
+  * @method Perceptron#importJSON
+  * @param {JSON} json containing learnings in as exported by [`exportJSON`](#exportjson).
+  * @return {boolean} Always true.
+  * @throws Error if `json` is invalid.
+ */
+ var importJSON = function ( json ) {
+   var parsedJSON;
+   if ( !json ) {
+     throw Error( 'wink-perceptron: undefined or null JSON encountered, import failed!' );
+   }
+   // Validate json format
+   var isOK = [
+     helpers.object.isObject,
+     helpers.object.isObject,
+     helpers.object.isObject,
+     helpers.array.isArray
+   ];
+
+   try {
+     parsedJSON = JSON.parse( json );
+   } catch ( ex ) {
+     throw Error( 'wink-perceptron: JSON parsing error during import:\n\t' + ex.message );
+   }
+
+   if ( !helpers.array.isArray( parsedJSON ) || parsedJSON.length !== isOK.length ) {
+     throw Error( 'wink-perceptron: invalid JSON encountered, can not import.' );
+   }
+   for ( var i = 0; i < isOK.length; i += 1 ) {
+     if ( !isOK[ i ]( parsedJSON[ i ] ) ) {
+       throw Error( 'wink-perceptron: invalid JSON encountered, can not import.' );
+     }
+   }
+   // All good, setup variable values.
+   // First reset everything.
+   reset();
+   // Load variable values.
+   avgWts = sumOfWts = parsedJSON[ 0 ];
+   avgBiases = sumOfBiases = parsedJSON[ 1 ];
+   // Return success.
+   imported = true;
+   return true;
+}; // importJSON()
+
   methods.defineConfig = defineConfig;
   methods.learn = learn;
   methods.predict = predict;
   methods.reset = reset;
+  methods.exportJSON = exportJSON;
+  methods.importJSON = importJSON;
   // methods.show = function () { console.log(sumOfWts); console.log(sumOfBiases); console.log( updates ); }; // eslint-disable-line
   return ( methods );
 }; // perceptron()

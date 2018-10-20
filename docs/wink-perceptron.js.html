@@ -26,7 +26,7 @@
 
 <nav>
     
-    <h2><a href="index.html">Home</a></h2><h2><a href="http://winkjs.org" target="_blank" >Wink JS</a></h2><h2><a href="https://github.com/winkjs/wink-perceptron" target="_blank" >Github</a></h2><h3>Classes</h3><ul><li><a href="Perceptron.html">Perceptron</a><ul class='methods'><li data-type='method'><a href="Perceptron.html#defineConfig">defineConfig</a></li><li data-type='method'><a href="Perceptron.html#learn">learn</a></li><li data-type='method'><a href="Perceptron.html#predict">predict</a></li><li data-type='method'><a href="Perceptron.html#reset">reset</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#perceptron">perceptron</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h2><a href="http://winkjs.org" target="_blank" >Wink JS</a></h2><h2><a href="https://github.com/winkjs/wink-perceptron" target="_blank" >Github</a></h2><h3>Classes</h3><ul><li><a href="Perceptron.html">Perceptron</a><ul class='methods'><li data-type='method'><a href="Perceptron.html#defineConfig">defineConfig</a></li><li data-type='method'><a href="Perceptron.html#exportJSON">exportJSON</a></li><li data-type='method'><a href="Perceptron.html#importJSON">importJSON</a></li><li data-type='method'><a href="Perceptron.html#learn">learn</a></li><li data-type='method'><a href="Perceptron.html#predict">predict</a></li><li data-type='method'><a href="Perceptron.html#reset">reset</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#perceptron">perceptron</a></li></ul>
 </nav>
 
 <div id="main">
@@ -118,6 +118,8 @@ var perceptron = function () {
   var updates = 0;
   // Number of examples seen.
   var examplesSeen = 0;
+  // Imported flag to allow prediction without learning.
+  var imported = false;
 
   // Configuration Variables and their default values.
   // Maximum number of learning iterations.
@@ -314,9 +316,13 @@ var perceptron = function () {
    * @return {number} Number of examples passed.
    * @example
    * myPerceptron.learn( examples );
-   * @throws Error if all `examples` belong to only a single class.
+   * @throws Error if all `examples` belong to only **one** class.
   */
   var learn = function ( examples ) {
+    if ( imported ) {
+      throw Error( 'wink-perceptron: learnings already imported.' );
+    }
+
     if ( typeof featureExtractor === 'function' ) {
       learnFromExtractedFeatures( examples );
     } else {
@@ -324,7 +330,7 @@ var perceptron = function () {
     }
 
     if ( ( Object.keys( sumOfBiases ) ).length &lt; 2 ) {
-      throw Error( 'wink-perceptron: there must be at least 2 classes in examples' );
+      throw Error( 'wink-perceptron: there must be at least 2 classes in examples.' );
     }
 
     examplesSeen = examples.length;
@@ -347,7 +353,7 @@ var perceptron = function () {
    * @throws Error if prediction is attempted without [learning](#learn).
   */
   var predict = function ( features ) {
-    if ( examplesSeen === 0 ) {
+    if ( !imported &amp;&amp; examplesSeen === 0 ) {
       throw Error( 'wink-perceptron: prediction is not possible without learning!' );
     }
 
@@ -402,7 +408,7 @@ var perceptron = function () {
     return ( { shuffleData: shuffleData, maxIterations: maxIterations, featureExtractor: featureExtractor } );
   }; // defineConfig()
 
-// ### reset
+  // ### reset
   /**
    * It completely resets the perceptron by re-initializing all the learning
    * related variables but does not touch the existing configuration.
@@ -426,6 +432,7 @@ var perceptron = function () {
     lastBsUpdatedAt = Object.create( null );
     updates = 0;
     examplesSeen = 0;
+    imported = false;
     // Setup aliases.
     avgWts = sumOfWts;
     avgBiases = sumOfBiases;
@@ -433,15 +440,124 @@ var perceptron = function () {
     return true;
   }; // reset()
 
+  // ### exportJSON
+  /**
+   * Exports the learning as a JSON, which may be saved as a text file for
+   * later use via [`importJSON()`](#importJSON).
+   *
+   * @method Perceptron#exportJSON
+   * @return {string} Learning in JSON format.
+   * @example
+   * myPerceptron.exportJSON();
+   * // returns JSON.
+  */
+  var exportJSON = function ( ) {
+    return (
+      JSON.stringify( [
+        avgWts,
+        avgBiases,
+        // For future expansion...
+        {},
+        []
+      ] )
+    );
+  }; // exportJSON()
+
+  // Imports the `json` in to learnings after validating the format of input JSON.
+ // If validation fails then throws error; otherwise on success import it
+ // returns `true`. Note, importing leads to resetting the classifier.
+ /**
+  * Imports an existing JSON learning for prediction.
+  * It is essential to [`definePrepTasks()`]()#definepreptasks and
+  * [`consolidate()`](#consolidate) before attempting to predict.
+  *
+  * @method Perceptron#importJSON
+  * @param {JSON} json containing learnings in as exported by [`exportJSON`](#exportjson).
+  * @return {boolean} Always true.
+  * @throws Error if `json` is invalid.
+ */
+ var importJSON = function ( json ) {
+   var parsedJSON;
+   if ( !json ) {
+     throw Error( 'wink-perceptron: undefined or null JSON encountered, import failed!' );
+   }
+   // Validate json format
+   var isOK = [
+     helpers.object.isObject,
+     helpers.object.isObject,
+     helpers.object.isObject,
+     helpers.array.isArray
+   ];
+
+   try {
+     parsedJSON = JSON.parse( json );
+   } catch ( ex ) {
+     throw Error( 'wink-perceptron: JSON parsing error during import:\n\t' + ex.message );
+   }
+
+   if ( !helpers.array.isArray( parsedJSON ) || parsedJSON.length !== isOK.length ) {
+     throw Error( 'wink-perceptron: invalid JSON encountered, can not import.' );
+   }
+   for ( var i = 0; i &lt; isOK.length; i += 1 ) {
+     if ( !isOK[ i ]( parsedJSON[ i ] ) ) {
+       throw Error( 'wink-perceptron: invalid JSON encountered, can not import.' );
+     }
+   }
+   // All good, setup variable values.
+   // First reset everything.
+   reset();
+   // Load variable values.
+   avgWts = sumOfWts = parsedJSON[ 0 ];
+   avgBiases = sumOfBiases = parsedJSON[ 1 ];
+   // Return success.
+   imported = true;
+   return true;
+}; // importJSON()
+
   methods.defineConfig = defineConfig;
   methods.learn = learn;
   methods.predict = predict;
   methods.reset = reset;
+  methods.exportJSON = exportJSON;
+  methods.importJSON = importJSON;
   // methods.show = function () { console.log(sumOfWts); console.log(sumOfBiases); console.log( updates ); }; // eslint-disable-line
   return ( methods );
 }; // perceptron()
 
 module.exports = perceptron;
+
+/*
+const trainingData = require( '../sample-data/iris-train.json' );
+// Load wink perceptron.
+var winkPerceptron = require( './wink-perceptron.js' );
+// Instantiate wink perceptron.
+var p = winkPerceptron();
+// Define configurtaion.
+p.defineConfig( { shuffleData: true, maxIterations: 21 } );
+// Learn from training data.
+p.learn( trainingData );
+
+console.log( p.exportJSON() );
+
+
+// const testData = require( '../sample-data/iris-test.json' );
+const testData = {
+  setosa: { sepalLength: 4.9, sepalWidth: 3, petalLength: 1.4, petalWidth: 0.2 },
+  versicolor: { sepalLength: 6.4, sepalWidth: 3.2, petalLength: 4.5, petalWidth: 1.5 },
+  virginica: { sepalLength: 7.2, sepalWidth: 3.6, petalLength: 6.1, petalWidth: 2.5 }
+};
+// var p = perceptron();
+// var json = require( './x.json' );
+// p.importJSON( JSON.stringify( json ) );
+// p.learn();
+// Attempt prediction for each iris plant type.
+console.log( p.predict( testData.setosa ) );
+// -> Iris-setosa
+console.log( p.predict( testData.versicolor ) );
+// -> Iris-versicolor
+console.log( p.predict( testData.virginica ) );
+// -> Iris-virginica
+*/
 </code></pre>
         </article>
     </section>
@@ -456,7 +572,7 @@ module.exports = perceptron;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Oct 19 2018 19:13:50 GMT+0530 (IST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Oct 20 2018 16:51:47 GMT+0530 (IST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

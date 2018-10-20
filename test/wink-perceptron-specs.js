@@ -39,7 +39,7 @@ var expect = chai.expect;
 var describe = mocha.describe;
 var it = mocha.it;
 
-const METHODS = 4;
+const METHODS = 6;
 
 // Extracts features from a single row of data.
 var extractFeatures = function ( e ) {
@@ -80,6 +80,16 @@ lines.forEach( function ( e ) {
 td.forEach( function ( e ) {
   testData.push( extractFeatures( e )[ 0 ] );
 } );
+
+// Sample test data.
+const sampleTestData = {
+  setosa: { sepalLength: 4.9, sepalWidth: 3, petalLength: 1.4, petalWidth: 0.2 },
+  versicolor: { sepalLength: 6.4, sepalWidth: 3.2, petalLength: 4.5, petalWidth: 1.5 },
+  virginica: { sepalLength: 7.2, sepalWidth: 3.6, petalLength: 6.1, petalWidth: 2.5 }
+};
+
+var learnings = require( './data/learnings.json' );
+learnings = JSON.stringify( learnings );
 
 // Tests
 describe( 'instantiate perceptron', function () {
@@ -146,6 +156,10 @@ describe( 'train & predict using from raw iris data', function () {
       if ( p.predict( e[ 0 ] ) === e[ 1 ].label ) pass += 1;
     } );
     expect( pass / testData.length > 0.9 ).to.equal( true );
+  } );
+
+  it( 'exported learnings must be an array of length 4', function () {
+    expect( ( JSON.parse( p.exportJSON() ).length ) ).to.equal( 4 );
   } );
 } );
 
@@ -234,5 +248,42 @@ describe( 'reset must unlearn every thing', function () {
     expect( p.reset( ) ).to.equal( true );
     expect( perceptron().learn.bind( undefined, [ [ { i: 1, need: 1, loan: 1, for: 1, a: 1, new: 1, car: 1 }, { label: 'autoloan' } ] ] ) )
       .to.throw( 'wink-perceptron: there must be at least 2 classes in examples' );
+  } );
+} );
+
+describe( 'predict using imported learnings of iris data', function () {
+  var p = perceptron();
+
+  it( 'must return true on successful import', function () {
+    expect( p.importJSON( learnings ) ).to.equal( true );
+  } );
+
+  it( 'must predict with sample test data correctly', function () {
+    expect( p.predict( sampleTestData.setosa ) ).to.equal( 'Iris-setosa' );
+    expect( p.predict( sampleTestData.versicolor ) ).to.equal( 'Iris-versicolor' );
+    expect( p.predict( sampleTestData.virginica ) ).to.equal( 'Iris-virginica' );
+  } );
+
+  it( 'must throw error on learning after import', function () {
+    expect( p.learn.bind( undefined, [ [ { i: 1, need: 1, loan: 1, for: 1, a: 1, new: 1, car: 1 }, { label: 'autoloan' } ] ] ) )
+      .to.throw( 'wink-perceptron: learnings already imported.' );
+  } );
+
+  it( 'must throw error on importing without json', function () {
+    expect( p.importJSON.bind( undefined, undefined ) )
+      .to.throw( 'wink-perceptron: undefined or null JSON encountered, import failed!' );
+  } );
+
+  it( 'must throw error on importing non-string json', function () {
+    expect( p.importJSON.bind( undefined, { x: 3 } ) )
+      .to.throw( 'wink-perceptron: JSON parsing error during import:' );
+  } );
+
+  it( 'must throw error on importing invalid json', function () {
+    expect( p.importJSON.bind( undefined, '3' ) )
+      .to.throw( 'wink-perceptron: invalid JSON encountered, can not import.' );
+
+    expect( p.importJSON.bind( undefined, '[ [], {}, 2, 3 ]' ) )
+      .to.throw( 'wink-perceptron: invalid JSON encountered, can not import.' );
   } );
 } );

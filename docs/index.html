@@ -26,7 +26,7 @@
 
 <nav>
     
-    <h2><a href="index.html">Home</a></h2><h2><a href="http://winkjs.org" target="_blank" >Wink JS</a></h2><h2><a href="https://github.com/winkjs/wink-perceptron" target="_blank" >Github</a></h2><h3>Classes</h3><ul><li><a href="Perceptron.html">Perceptron</a><ul class='methods'><li data-type='method'><a href="Perceptron.html#defineConfig">defineConfig</a></li><li data-type='method'><a href="Perceptron.html#learn">learn</a></li><li data-type='method'><a href="Perceptron.html#predict">predict</a></li><li data-type='method'><a href="Perceptron.html#reset">reset</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#perceptron">perceptron</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h2><a href="http://winkjs.org" target="_blank" >Wink JS</a></h2><h2><a href="https://github.com/winkjs/wink-perceptron" target="_blank" >Github</a></h2><h3>Classes</h3><ul><li><a href="Perceptron.html">Perceptron</a><ul class='methods'><li data-type='method'><a href="Perceptron.html#defineConfig">defineConfig</a></li><li data-type='method'><a href="Perceptron.html#exportJSON">exportJSON</a></li><li data-type='method'><a href="Perceptron.html#importJSON">importJSON</a></li><li data-type='method'><a href="Perceptron.html#learn">learn</a></li><li data-type='method'><a href="Perceptron.html#predict">predict</a></li><li data-type='method'><a href="Perceptron.html#reset">reset</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#perceptron">perceptron</a></li></ul>
 </nav>
 
 <div id="main">
@@ -54,8 +54,8 @@
 <h3><a href="https://travis-ci.org/winkjs/wink-perceptron"><img src="https://api.travis-ci.org/winkjs/wink-perceptron.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/winkjs/wink-perceptron?branch=master"><img src="https://coveralls.io/repos/github/winkjs/wink-perceptron/badge.svg?branch=master" alt="Coverage Status"></a> <a href="http://inch-ci.org/github/winkjs/wink-perceptron"><img src="http://inch-ci.org/github/winkjs/wink-perceptron.svg?branch=master" alt="Inline docs"></a> <a href="https://david-dm.org/winkjs/wink-perceptron"><img src="https://david-dm.org/winkjs/wink-perceptron/status.svg" alt="dependencies Status"></a> <a href="https://david-dm.org/winkjs/wink-perceptron?type=dev"><img src="https://david-dm.org/winkjs/wink-perceptron/dev-status.svg" alt="devDependencies Status"></a> <a href="https://gitter.im/winkjs/Lobby"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" alt="Gitter"></a></h3><p><a href="http://winkjs.org/"><img align="right" src="https://decisively.github.io/wink-logos/logo-title.png" width="100px" ></a></p>
 <p>Wink Perceptron is a fast and effective way to learn linearly separable patterns from either dense or sparse data. Its averaging function results in better generalization compared to the vanilla implementation of perceptron.</p>
 <h3>Installation</h3><p>Use <a href="https://www.npmjs.com/package/wink-perceptron">npm</a> to install:</p>
-<pre class="prettyprint source"><code>npm install wink-perceptron --save</code></pre><h3>Getting Started</h3><p>Here is an example of predicting type of iris plant from the Iris Data Set.</p>
-<pre class="prettyprint source lang-javascript"><code>// Load training data from Iris Data Set obtained from
+<pre class="prettyprint source"><code>npm install wink-perceptron --save</code></pre><h3>Getting Started</h3><p>Here is an example of predicting type of iris plant from the <a href="https://archive.ics.uci.edu/ml/datasets/iris">Iris Data Set</a>.</p>
+<pre class="prettyprint source lang-javascript"><code>// Load training data — the Iris Data Set obtained from
 // UCI Machine Learning Repository; it has been converted
 // into JSON format.
 // You may need to update the path in the &quot;require&quot; statement
@@ -86,7 +86,7 @@ console.log( perceptron.predict( testData.virginica ) );
 // -> Iris-virginica</code></pre><p>Try <a href="https://npm.runkit.com/wink-perceptron">experimenting with this example on Runkit</a> in the browser.</p>
 <h3>Documentation</h3><p>Check out the <a href="http://winkjs.org/wink-perceptron/">perceptron API documentation</a> to learn more.</p>
 <h3>Need Help?</h3><p>If you spot a bug and the same has not yet been reported, raise a new <a href="https://github.com/winkjs/wink-perceptron/issues">issue</a> or consider fixing it and sending a pull request.</p>
-<h3>About wink</h3><p><a href="http://winkjs.org/">Wink</a> is a growing family of high quality <a href="http://winkjs.org/packages.html">packages</a> for Statistical Analysis, Natural Language Processing and Machine Learning in NodeJS.</p>
+<h3>About wink</h3><p><a href="http://winkjs.org/">Wink</a> is a growing family of high quality <a href="http://winkjs.org/packages.html">packages</a> for <strong>Statistical Analysis</strong>, <strong>Natural Language Processing</strong> and <strong>Machine Learning</strong> in NodeJS. The code is throughly documented for easy comprehension and has a test coverage of ~100% for reliability.</p>
 <h3>Copyright &amp; License</h3><p><strong>wink-perceptron</strong> is copyright 2017-18 <a href="http://graype.in/">GRAYPE Systems Private Limited</a>.</p>
 <p>It is licensed under the under the terms of the GNU Affero General Public License as published by the Free Software Foundation, version 3 of the License.</p></article>
     </section>
@@ -103,7 +103,7 @@ console.log( perceptron.predict( testData.virginica ) );
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Oct 19 2018 19:13:50 GMT+0530 (IST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Oct 20 2018 16:51:47 GMT+0530 (IST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
