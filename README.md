@@ -58,10 +58,10 @@ Check out the [perceptron API documentation](http://winkjs.org/wink-perceptron/)
 If you spot a bug and the same has not yet been reported, raise a new [issue](https://github.com/winkjs/wink-perceptron/issues) or consider fixing it and sending a pull request.
 
 ### About wink
-[Wink](http://winkjs.org/) is a growing family of high quality [packages](http://winkjs.org/packages.html) for **Statistical Analysis**, **Natural Language Processing** and **Machine Learning** in NodeJS. The code is throughly documented for easy comprehension and has a test coverage of ~100% for reliability.
+[Wink](http://winkjs.org/) is a family of open source packages for **Statistical Analysis**, **Natural Language Processing** and **Machine Learning** in NodeJS. The code is **thoroughly documented** for easy human comprehension and has a **test coverage of ~100%** for reliability to build production grade solutions.
 
 ### Copyright & License
 
 **wink-perceptron** is copyright 2017-18 [GRAYPE Systems Private Limited](http://graype.in/).
 
-It is licensed under the under the terms of the GNU Affero General Public License as published by the Free Software Foundation, version 3 of the License.
+It is licensed under the terms of the MIT License.

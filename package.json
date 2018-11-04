@@ -24,7 +24,7 @@
     "url": "git+https://github.com/winkjs/wink-perceptron.git"
   },
   "author": "Sanjaya Kumar Saxena",
-  "license": "AGPL-3.0-only",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/winkjs/wink-perceptron/issues"
   },
@@ -34,7 +34,7 @@
     "coveralls": "^3.0.2",
     "docdash": "^1.0.0",
     "docker": "^1.0.0",
-    "eslint": "^5.7.0",
+    "eslint": "^5.8.0",
     "istanbul": "^1.1.0-alpha.1",
     "jsdoc": "^3.5.5",
     "mocha": "^5.2.0",
@@ -42,6 +42,6 @@
   },
   "runkitExampleFilename": "./runkit/example.js",
   "dependencies": {
-    "wink-helpers": "^1.5.0"
+    "wink-helpers": "^2.0.0"
   }
 }
