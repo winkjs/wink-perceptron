@@ -34,6 +34,10 @@
   ((window.gitter = {}).chat = {}).options = {
     room: 'winkjs/Lobby'
   };
+  window.onload = function () {
+      document.querySelector('.gitter-open-chat-button').innerText = 'Need help?'
+      document.querySelector('.gitter-open-chat-button').style.display = 'block';
+  }
 </script>
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 <script>try{Typekit.load({ async: true });}catch(e){}</script>
@@ -68,7 +72,13 @@ body {
 .navbar a {
   color: #fff;
   line-height: 60px;
+  margin-left: 0;
+}
+
+.navbar a.navbar-brand {
   margin-left: 20px;
+  display: block;
+  min-width: 40px;
 }
 
 .navbar-right {
@@ -87,10 +97,6 @@ body {
 }
 
 /* Override docdash */
-nav {
-  top: 80px;
-}
-
 #main {
   margin-top: 30px;
 }
@@ -98,6 +104,7 @@ nav {
 /* Gitter */
 .gitter-open-chat-button {
   background: #6C307D;
+  display: none;
 }
 
 .gitter-open-chat-button:hover {
@@ -118,6 +125,16 @@ window.addEventListener('DOMContentLoaded', function () {
       window.scrollTo( 0, (window.pageYOffset || document.documentElement.scrollTop) - 72);
     }, 0)
   }
+
+  document.getElementById('toc-button').addEventListener('click', function () {
+      if (document.getElementById('side-nav').className === '') {
+        document.getElementById('side-nav').className = 'is-open';
+        document.getElementById('toc-button-img').setAttribute('src','./close.svg');
+      } else {
+        document.getElementById('side-nav').className = '';
+        document.getElementById('toc-button-img').setAttribute('src','./menu.svg');
+      }
+  })
 });
 
 window.addEventListener( 'hashchange', function (e) {
@@ -139,38 +156,34 @@ function openMember() {
       <div class="navbar-header">
         <a href="https://winkjs.org/" title="wink" class="navbar-brand">
           <img src="https://winkjs.org/images/logo.svg">
-          wink
+          <span>wink</span>
         </a>
       </div>
-      <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="main-nav">
-        <li><a href="https://winkjs.org/packages.html" class="">Packages</a></li>
-        <li><a href="https://winkjs.org/blog.html" class="">Blog</a></li>
-        <li><a href="http://github.com/winkjs">Github</a></li>
-        <li><a href="https://twitter.com/winkjs_org">Twitter</a></li>
-        <li><a href="https://winkjs.org/about.html" class="">About</a></li>
-      </ul>
+      <div class="sausage-links">
+        <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="main-nav">
+          <li><a href="https://winkjs.org/packages.html" class="">Packages</a></li>
+          <li><a href="https://winkjs.org/showcase.html" class="">Showcase</a></li>
+          <li><a href="https://winkjs.org/blog.html" class="">Blog</a></li>
+          <li><a href="http://github.com/winkjs">Github</a></li>
+          <li><a href="https://winkjs.org/about.html" class="">About</a></li>
+        </div>
+      </nav>
     </div>
 </header>
 
+<div id="toc-button">
+  <img src="./menu.svg" alt="" id="toc-button-img">
+</div>
 
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
 
-<label for="nav-trigger" class="overlay"></label>
+<div class="content-container">
+  <div class="main-container">
+    <div id="main">
+        
+        <h1 class="page-title">Perceptron</h1>
+        
 
-<nav >
-    
-    <h2><a href="index.html">Summary</a></h2><h2><a href="https://github.com/winkjs/wink-perceptron" target="_blank" >Github</a></h2><h3>Classes</h3><ul><li><a href="Perceptron.html">Perceptron</a><ul class='methods'><li data-type='method'><a href="Perceptron.html#defineConfig">defineConfig</a></li><li data-type='method'><a href="Perceptron.html#exportJSON">exportJSON</a></li><li data-type='method'><a href="Perceptron.html#importJSON">importJSON</a></li><li data-type='method'><a href="Perceptron.html#learn">learn</a></li><li data-type='method'><a href="Perceptron.html#predict">predict</a></li><li data-type='method'><a href="Perceptron.html#reset">reset</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#perceptron">perceptron</a></li></ul>
-</nav>
-
-<div id="main">
-    
-    <h1 class="page-title">Perceptron</h1>
-    
-
-    
+        
 
 
 
@@ -179,9 +192,9 @@ function openMember() {
 
 <header>
     
-        <h2>
+        <!--<h2>
         Perceptron
-        </h2>
+        </h2>-->
         
             <div class="class-description"><p>Multi-class Averaged Perceptron  class.</p></div>
         
@@ -196,7 +209,7 @@ function openMember() {
     
 
     
-    
+
     
 
      
@@ -213,7 +226,10 @@ function openMember() {
 
     
 
-    <h4 class="name" id="defineConfig"><span class="type-signature"></span>defineConfig<span class="signature">(config)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="defineConfig">
+      defineConfig
+    </h4>
+    <div class="name-signature"><span class="type-signature"></span>defineConfig<span class="signature">(config)</span><span class="type-signature"> &rarr; {object}</span></div
 
     
 
@@ -222,12 +238,12 @@ function openMember() {
 
 <dl class="details">
 
-    
+    <!--
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="wink-perceptron.js.html">wink-perceptron.js</a>, <a href="wink-perceptron.js.html#line326">line 326</a>
     </li></ul></dd>
-    
+    -->
 
     
 
@@ -285,7 +301,7 @@ myPerceptron.defineConfig( { shuffleData: true } );
 
 
 
-    <h5>Parameters:</h5>
+    <h5>Parameters</h5>
     
 
 <table class="params">
@@ -310,13 +326,14 @@ myPerceptron.defineConfig( { shuffleData: true } );
 
         <tr>
             
-                <td class="name"><code>config</code></td>
+                <td class="name">config</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">object</span>
+
 
 
             
@@ -357,13 +374,14 @@ myPerceptron.defineConfig( { shuffleData: true } );
 
         <tr>
             
-                <td class="name"><code>shuffleData</code></td>
+                <td class="name">shuffleData</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">boolean</span>
+
 
 
             
@@ -384,7 +402,7 @@ myPerceptron.defineConfig( { shuffleData: true } );
             
                 <td class="default">
                 
-                    <code>false</code>
+                    false
                 
                 </td>
             
@@ -397,13 +415,14 @@ training examples should be randomly shuffled after each iteration a.k.a epoch.<
 
         <tr>
             
-                <td class="name"><code>maxIterations</code></td>
+                <td class="name">maxIterations</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">number</span>
+
 
 
             
@@ -424,7 +443,7 @@ training examples should be randomly shuffled after each iteration a.k.a epoch.<
             
                 <td class="default">
                 
-                    <code>9</code>
+                    9
                 
                 </td>
             
@@ -437,13 +456,14 @@ over the examples in order to complete the learning.</p></td>
 
         <tr>
             
-                <td class="name"><code>featureExtractor</code></td>
+                <td class="name">featureExtractor</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">function</span>
+
 
 
             
@@ -464,7 +484,7 @@ over the examples in order to complete the learning.</p></td>
             
                 <td class="default">
                 
-                    <code>null</code>
+                    null
                 
                 </td>
             
@@ -503,7 +523,7 @@ not of the extracted features with this function.</p></td>
 
 
 
-<h5>Returns:</h5>
+<h5>Returns</h5>
 
         
 <div class="param-desc">
@@ -521,6 +541,7 @@ not of the extracted features with this function.</p></td>
 <span class="param-type">object</span>
 
 
+
     </dd>
 </dl>
 
@@ -528,12 +549,17 @@ not of the extracted features with this function.</p></td>
 
 
 
+<hr>
+
         
             
 
     
 
-    <h4 class="name" id="exportJSON"><span class="type-signature"></span>exportJSON<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="exportJSON">
+      exportJSON
+    </h4>
+    <div class="name-signature"><span class="type-signature"></span>exportJSON<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></div
 
     
 
@@ -542,12 +568,12 @@ not of the extracted features with this function.</p></td>
 
 <dl class="details">
 
-    
+    <!--
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="wink-perceptron.js.html">wink-perceptron.js</a>, <a href="wink-perceptron.js.html#line405">line 405</a>
     </li></ul></dd>
-    
+    -->
 
     
 
@@ -618,7 +644,7 @@ myPerceptron.exportJSON();
 
 
 
-<h5>Throws:</h5>
+<h5>Throws</h5>
 
         
 
@@ -632,7 +658,7 @@ myPerceptron.exportJSON();
     
 
 
-<h5>Returns:</h5>
+<h5>Returns</h5>
 
         
 <div class="param-desc">
@@ -650,6 +676,7 @@ myPerceptron.exportJSON();
 <span class="param-type">string</span>
 
 
+
     </dd>
 </dl>
 
@@ -657,12 +684,17 @@ myPerceptron.exportJSON();
 
 
 
+<hr>
+
         
             
 
     
 
-    <h4 class="name" id="importJSON"><span class="type-signature"></span>importJSON<span class="signature">(json)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="importJSON">
+      importJSON
+    </h4>
+    <div class="name-signature"><span class="type-signature"></span>importJSON<span class="signature">(json)</span><span class="type-signature"> &rarr; {boolean}</span></div
 
     
 
@@ -671,12 +703,12 @@ myPerceptron.exportJSON();
 
 <dl class="details">
 
-    
+    <!--
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="wink-perceptron.js.html">wink-perceptron.js</a>, <a href="wink-perceptron.js.html#line434">line 434</a>
     </li></ul></dd>
-    
+    -->
 
     
 
@@ -734,7 +766,7 @@ myPerceptron.importJSON( json );</code></pre>
 
 
 
-    <h5>Parameters:</h5>
+    <h5>Parameters</h5>
     
 
 <table class="params">
@@ -759,13 +791,14 @@ myPerceptron.importJSON( json );</code></pre>
 
         <tr>
             
-                <td class="name"><code>json</code></td>
+                <td class="name">json</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">JSON</span>
+
 
 
             
@@ -795,7 +828,7 @@ myPerceptron.importJSON( json );</code></pre>
 
 
 
-<h5>Throws:</h5>
+<h5>Throws</h5>
 
         
 
@@ -809,7 +842,7 @@ myPerceptron.importJSON( json );</code></pre>
     
 
 
-<h5>Returns:</h5>
+<h5>Returns</h5>
 
         
 <div class="param-desc">
@@ -827,6 +860,7 @@ myPerceptron.importJSON( json );</code></pre>
 <span class="param-type">boolean</span>
 
 
+
     </dd>
 </dl>
 
@@ -834,12 +868,17 @@ myPerceptron.importJSON( json );</code></pre>
 
 
 
+<hr>
+
         
             
 
     
 
-    <h4 class="name" id="learn"><span class="type-signature"></span>learn<span class="signature">(examples)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    <h4 class="name" id="learn">
+      learn
+    </h4>
+    <div class="name-signature"><span class="type-signature"></span>learn<span class="signature">(examples)</span><span class="type-signature"> &rarr; {number}</span></div
 
     
 
@@ -848,12 +887,12 @@ myPerceptron.importJSON( json );</code></pre>
 
 <dl class="details">
 
-    
+    <!--
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="wink-perceptron.js.html">wink-perceptron.js</a>, <a href="wink-perceptron.js.html#line264">line 264</a>
     </li></ul></dd>
-    
+    -->
 
     
 
@@ -910,7 +949,7 @@ control learning process.</p>
 
 
 
-    <h5>Parameters:</h5>
+    <h5>Parameters</h5>
     
 
 <table class="params">
@@ -935,13 +974,14 @@ control learning process.</p>
 
         <tr>
             
-                <td class="name"><code>examples</code></td>
+                <td class="name">examples</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">Array.&lt;array></span>
+
 
 
             
@@ -975,7 +1015,7 @@ class label contains single name/string-value pair as <code>{ label: &lt;class&g
 
 
 
-<h5>Throws:</h5>
+<h5>Throws</h5>
 
         
 
@@ -990,7 +1030,7 @@ after <a href="#importJSON"><code>importJSON()</code></a>.</p>
     
 
 
-<h5>Returns:</h5>
+<h5>Returns</h5>
 
         
 <div class="param-desc">
@@ -1008,6 +1048,7 @@ after <a href="#importJSON"><code>importJSON()</code></a>.</p>
 <span class="param-type">number</span>
 
 
+
     </dd>
 </dl>
 
@@ -1015,12 +1056,17 @@ after <a href="#importJSON"><code>importJSON()</code></a>.</p>
 
 
 
+<hr>
+
         
             
 
     
 
-    <h4 class="name" id="predict"><span class="type-signature"></span>predict<span class="signature">(features)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="predict">
+      predict
+    </h4>
+    <div class="name-signature"><span class="type-signature"></span>predict<span class="signature">(features)</span><span class="type-signature"> &rarr; {string}</span></div
 
     
 
@@ -1029,12 +1075,12 @@ after <a href="#importJSON"><code>importJSON()</code></a>.</p>
 
 <dl class="details">
 
-    
+    <!--
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="wink-perceptron.js.html">wink-perceptron.js</a>, <a href="wink-perceptron.js.html#line302">line 302</a>
     </li></ul></dd>
-    
+    -->
 
     
 
@@ -1091,7 +1137,7 @@ it returns a value <strong><code>unknown</code></strong>.</p>
 
 
 
-    <h5>Parameters:</h5>
+    <h5>Parameters</h5>
     
 
 <table class="params">
@@ -1116,13 +1162,14 @@ it returns a value <strong><code>unknown</code></strong>.</p>
 
         <tr>
             
-                <td class="name"><code>features</code></td>
+                <td class="name">features</td>
             
 
             <td class="type">
             
                 
 <span class="param-type">object</span>
+
 
 
             
@@ -1153,7 +1200,7 @@ feature.</p></td>
 
 
 
-<h5>Throws:</h5>
+<h5>Throws</h5>
 
         
 
@@ -1167,7 +1214,7 @@ feature.</p></td>
     
 
 
-<h5>Returns:</h5>
+<h5>Returns</h5>
 
         
 <div class="param-desc">
@@ -1185,6 +1232,7 @@ feature.</p></td>
 <span class="param-type">string</span>
 
 
+
     </dd>
 </dl>
 
@@ -1192,12 +1240,17 @@ feature.</p></td>
 
 
 
+<hr>
+
         
             
 
     
 
-    <h4 class="name" id="reset"><span class="type-signature"></span>reset<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="reset">
+      reset
+    </h4>
+    <div class="name-signature"><span class="type-signature"></span>reset<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></div
 
     
 
@@ -1206,12 +1259,12 @@ feature.</p></td>
 
 <dl class="details">
 
-    
+    <!--
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="wink-perceptron.js.html">wink-perceptron.js</a>, <a href="wink-perceptron.js.html#line373">line 373</a>
     </li></ul></dd>
-    
+    -->
 
     
 
@@ -1285,7 +1338,7 @@ again prior to learning if required.</em></p>
 
 
 
-<h5>Returns:</h5>
+<h5>Returns</h5>
 
         
 <div class="param-desc">
@@ -1303,12 +1356,15 @@ again prior to learning if required.</em></p>
 <span class="param-type">boolean</span>
 
 
+
     </dd>
 </dl>
 
     
 
 
+
+<hr>
 
         
     
@@ -1324,18 +1380,40 @@ again prior to learning if required.</em></p>
 
 
 
-    
+        
+    </div>
+  </div>
+
+  <nav  id="side-nav">
+      
+      <h2><a href="index.html">Summary</a></h2><h2><a href="https://github.com/winkjs/wink-perceptron" target="_blank" >Github</a></h2><h3>Classes</h3><ul><li><a href="Perceptron.html">Perceptron</a><ul class='methods'><li data-type='method'><a href="Perceptron.html#defineConfig">defineConfig</a></li><li data-type='method'><a href="Perceptron.html#exportJSON">exportJSON</a></li><li data-type='method'><a href="Perceptron.html#importJSON">importJSON</a></li><li data-type='method'><a href="Perceptron.html#learn">learn</a></li><li data-type='method'><a href="Perceptron.html#predict">predict</a></li><li data-type='method'><a href="Perceptron.html#reset">reset</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#perceptron">perceptron</a></li></ul>
+  </nav>
 </div>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Mar 21 2019 09:24:08 GMT+0530 (IST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Nov 23 2019 15:03:09 GMT+0530 (IST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
 <script src="scripts/linenumber.js"></script>
 
 
+
+<script src="https://embed.runkit.com"></script>
+<script type="text/javascript">
+  var els = document.getElementsByClassName("runkit");
+
+  Array.prototype.forEach.call(els, function(el) {
+    // Do stuff here
+    var source = el.innerHTML;
+    el.innerHTML = '';
+    var n = RunKit.createNotebook( {
+      element: el,
+      source: source
+    } );
+  });
+</script>
 </body>
 </html>
